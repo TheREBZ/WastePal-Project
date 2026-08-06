@@ -15,6 +15,7 @@ const Register = () => {
                 <FontAwesomeIcon icon={faUser} className="icon"/>
                 <p>Waste Picker</p>
             </button>
+            <button className="trouble-registering">Having Trouble Registering?</button>
         </section>
     </main>
   )

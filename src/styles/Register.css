@@ -26,6 +26,7 @@
     height: 266px;
     border: 1px solid var(--eco-green);
     font-size: 26px;
+    background-color: transparent;
     font-weight: var(--fw-regular);
     display: flex;
     flex-direction: column;
@@ -33,7 +34,7 @@
     align-items: center;
     gap: 15px;
     color: var(--charcoal-grey);
-    /* flex-shrink: 4; */
+    flex-shrink: 4;
     flex-wrap: wrap;
 }
 
@@ -47,6 +48,20 @@
     cursor: pointer;
     transition: var(--transition);
     transform: var(--transform);
+}
+
+.trouble-registering{
+    color: var(--eco-green);
+    font-size: 16px;
+    font-weight: var(--fw-regular);
+    text-decoration: underline;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
+.trouble-registering:hover {
+    color: var(--trust-blue);
 }
 
 @media screen and (max-width: 550px) {
@@ -88,6 +103,10 @@
 
     .icon {
         font-size: 45px;
+    }
+
+    .trouble-registering:active {
+        color: var(--trust-blue);
     }
     
 }
