@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Space+Grotesk:wght@300..700&display=swap');
+
+
+*:root{
+    /* Primary colors */
+    --eco-green: #2E7D32;
+    --trust-blue: #209CDB;
+
+    /* Seconday colors */
+    --white: #FFFFFF;
+    --light-green: #C8E6C9;
+    --charcoal-grey: #37474F;
+    --black: #000000;
+
+    /* Accent/Highlight colors */
+    --warm-yellow: #FBC02D;
+
+    /* Typography */
+    --manrope-primary: "Manrope", sans-serif;
+    --inter-secondary: "Inter", sans-serif;
+
+    /* Font weights */
+    --fw-light: 100;
+    --fw-regular: 300;
+    --fw-bold: 600;
+
+    /* transforms & transitions*/
+    --transition: .4s ease;
+    --transform: scale(1.05);
+    --tranform-mobile: scale(1.09);
+}
