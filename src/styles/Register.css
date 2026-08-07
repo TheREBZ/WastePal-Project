@@ -1,5 +1,3 @@
-/* @import url("./variables.css"); */
-/* @import url("./globals.css"); */
 
 .register-container {
     height: 100vh;
@@ -64,7 +62,7 @@
     color: var(--trust-blue);
 }
 
-@media screen and (max-width: 550px) {
+@media (max-width: 920px) {
 
     .register-container {
         display: flex;
