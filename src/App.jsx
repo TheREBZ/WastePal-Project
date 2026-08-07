@@ -1,14 +1,43 @@
-import "./styles/variables.css"
-import "./styles/globals.css"
-import Register from "./pages/Register"
+import "./styles/variables.css";
+import "./styles/globals.css";
+import { RouterProvider, useRouter } from "./router/Router";
 
+import Home from "./pages/Home";
+import Features from "./pages/Features";
+import HowItWorks from "./pages/HowItWorks";
+import Pricing from "./pages/Pricing";
+import AboutUs from "./pages/AboutUs";
+import Contact from "./pages/Contact";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+
+const ROUTES = {
+  "/": Home,
+  "/features": Features,
+  "/how-it-works": HowItWorks,
+  "/pricing": Pricing,
+  "/about": AboutUs,
+  "/contact": Contact,
+  "/login": Login,
+  "/signup": Signup,
+  "/register": Register,
+  "/dashboard": Dashboard,
+};
+
+const AppRoutes = () => {
+  const { path } = useRouter();
+  const Page = ROUTES[path] || Home;
+  return <Page />;
+};
 
 const App = () => {
   return (
-    <>
-    <Register />
-    </>
-  )
-}
+    <RouterProvider>
+      <AppRoutes />
+    </RouterProvider>
+  );
+};
 
-export default App
+export default App;
