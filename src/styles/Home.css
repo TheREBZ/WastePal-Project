@@ -1,0 +1,231 @@
+.hero {
+  background: linear-gradient(135deg, var(--bg-mint) 0%, var(--white) 60%);
+  padding: 64px 0 40px;
+}
+
+.hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--white);
+  border: 1px solid var(--border-grey);
+  color: var(--eco-green);
+  font-size: 13px;
+  font-weight: var(--fw-bold);
+  padding: 6px 14px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+
+.hero-copy h1 {
+  font-size: 44px;
+  line-height: 1.15;
+  color: var(--charcoal-grey);
+  margin-bottom: 18px;
+}
+
+.hero-copy h1 span {
+  color: var(--eco-green);
+}
+
+.hero-copy p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  max-width: 480px;
+  margin-bottom: 28px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hero-visual {
+  position: relative;
+}
+
+.hero-art {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(160deg, #1b5e20 0%, var(--eco-green) 45%, #66bb6a 100%);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 12%;
+}
+
+.hero-art-city {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 6%;
+  padding: 0 8%;
+}
+
+.hero-art-city span {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.18);
+  border-radius: 6px 6px 0 0;
+}
+
+.hero-art-city span:nth-child(1) {
+  height: 55%;
+}
+.hero-art-city span:nth-child(2) {
+  height: 80%;
+}
+.hero-art-city span:nth-child(3) {
+  height: 40%;
+}
+.hero-art-city span:nth-child(4) {
+  height: 65%;
+}
+
+.hero-art-truck {
+  position: relative;
+  z-index: 2;
+  font-size: 54px;
+  color: var(--white);
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.25));
+}
+
+.hero-floating-card {
+  position: absolute;
+  bottom: -24px;
+  left: 24px;
+  background-color: var(--white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hero-floating-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--bg-mint);
+  color: var(--eco-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.hero-floating-title {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.hero-floating-value {
+  font-size: 13px;
+  font-weight: var(--fw-bold);
+  color: var(--charcoal-grey);
+}
+
+.stats {
+  padding: 56px 0 72px;
+}
+
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.stat-card {
+  background-color: var(--bg-mint-soft);
+  border: 1px solid var(--border-grey);
+  border-radius: var(--radius-md);
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.stat-icon {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--white);
+  color: var(--eco-green);
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+
+.stat-value {
+  font-family: var(--manrope-primary);
+  font-size: 26px;
+  font-weight: var(--fw-bold);
+  color: var(--charcoal-grey);
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+@media screen and (max-width: 900px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-copy h1 {
+    font-size: 34px;
+  }
+
+  .hero-visual {
+    margin-top: 32px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .hero {
+    padding: 40px 0 32px;
+  }
+
+  .hero-inner {
+    padding: 0 20px;
+    gap: 60px;
+  }
+
+  .hero-copy h1 {
+    font-size: 28px;
+  }
+
+  .hero-copy p {
+    max-width: none;
+  }
+
+  .hero-actions .btn {
+    flex: 1;
+  }
+
+  .stats-inner {
+    grid-template-columns: 1fr;
+    padding: 0 20px;
+  }
+}

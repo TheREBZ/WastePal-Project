@@ -1,0 +1,129 @@
+.pricing-hero {
+  text-align: center;
+  padding: 64px 32px 40px;
+  max-width: 720px;
+}
+
+.pricing-hero h1 {
+  font-size: 34px;
+  color: var(--charcoal-grey);
+  margin-bottom: 14px;
+}
+
+.pricing-hero p {
+  font-size: 16px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  align-items: start;
+  padding-bottom: 72px;
+}
+
+.pricing-card {
+  background-color: var(--white);
+  border: 1px solid var(--border-grey);
+  border-radius: var(--radius-md);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.pricing-card--recommended {
+  border: 2px solid var(--eco-green);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-8px);
+}
+
+.pricing-badge {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--eco-green);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: var(--fw-bold);
+  padding: 4px 14px;
+  border-radius: 100px;
+}
+
+.pricing-card h3 {
+  font-family: var(--manrope-primary);
+  font-size: 18px;
+  color: var(--charcoal-grey);
+}
+
+.pricing-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 6px 0 18px;
+  min-height: 36px;
+}
+
+.pricing-price {
+  font-family: var(--manrope-primary);
+  font-size: 32px;
+  font-weight: var(--fw-bold);
+  color: var(--charcoal-grey);
+  margin-bottom: 18px;
+}
+
+.pricing-price span {
+  font-size: 14px;
+  font-weight: var(--fw-regular);
+  color: var(--text-muted);
+}
+
+.pricing-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex: 1;
+}
+
+.pricing-features li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--charcoal-grey);
+}
+
+.pricing-check {
+  color: var(--eco-green);
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+@media screen and (max-width: 1024px) {
+  .pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pricing-card--recommended {
+    transform: none;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .pricing-hero {
+    padding: 48px 20px 32px;
+  }
+
+  .pricing-hero h1 {
+    font-size: 26px;
+  }
+
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    padding: 0 20px 48px;
+  }
+}

@@ -28,4 +28,21 @@
     --transition: .4s ease;
     --transform: scale(1.05);
     --tranform-mobile: scale(1.09);
+    --transform-mobile: scale(1.09);
+
+    /* Extended surface / neutral palette (derived from primaries above) */
+    --bg-mint: #EDF7EE;
+    --bg-mint-soft: #F4FAF5;
+    --bg-grey: #F7F9FA;
+    --border-grey: #E5EAEC;
+    --text-muted: #7C8A90;
+    --danger: #D64545;
+
+    /* Shadows & radii */
+    --shadow-sm: 0 1px 2px rgba(16, 24, 27, 0.06);
+    --shadow-md: 0 8px 24px rgba(16, 24, 27, 0.08);
+    --shadow-lg: 0 20px 48px rgba(16, 24, 27, 0.12);
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 24px;
 }

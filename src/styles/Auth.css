@@ -1,0 +1,152 @@
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  background: linear-gradient(160deg, var(--bg-mint) 0%, var(--white) 55%, var(--bg-mint-soft) 100%);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  background-color: var(--white);
+  border: 1px solid var(--border-grey);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  padding: 36px 32px;
+}
+
+.auth-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--manrope-primary);
+  font-weight: var(--fw-bold);
+  font-size: 19px;
+  color: var(--charcoal-grey);
+  margin-bottom: 20px;
+}
+
+.auth-logo-icon {
+  color: var(--eco-green);
+}
+
+.auth-card h1 {
+  text-align: center;
+  font-size: 22px;
+  color: var(--charcoal-grey);
+  margin-bottom: 6px;
+}
+
+.auth-subtitle {
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.auth-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--border-grey);
+  border-radius: var(--radius-sm);
+  padding: 0 14px;
+}
+
+.field-with-icon svg {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.field-with-icon input {
+  border: none;
+  padding: 12px 0;
+  flex: 1;
+}
+
+.field-with-icon input:focus {
+  outline: none;
+}
+
+.field-with-icon:focus-within {
+  border-color: var(--eco-green);
+}
+
+.auth-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.auth-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--charcoal-grey);
+  cursor: pointer;
+}
+
+.auth-checkbox--terms {
+  align-items: flex-start;
+  line-height: 1.5;
+}
+
+.auth-checkbox input {
+  accent-color: var(--eco-green);
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.auth-link {
+  color: var(--eco-green);
+  text-decoration: none;
+  font-weight: var(--fw-bold);
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+.auth-card .btn {
+  margin-top: 4px;
+}
+
+.auth-footer {
+  text-align: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 22px;
+}
+
+.auth-footer a {
+  color: var(--eco-green);
+  font-weight: var(--fw-bold);
+  text-decoration: none;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 480px) {
+  .auth-page {
+    padding: 20px;
+  }
+
+  .auth-card {
+    padding: 28px 22px;
+  }
+}
