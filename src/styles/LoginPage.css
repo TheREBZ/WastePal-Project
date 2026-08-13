@@ -6,7 +6,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 30px;
+    gap: 40px;
+    background: linear-gradient(160deg, var(--bg-mint) 0%, var(--white) 55%, var(--bg-mint-soft) 100%);
 }
 
 .welcome-text h1{
@@ -67,12 +68,14 @@
 .login-btn-container{
     display: flex;
     justify-content: center;
+    margin-bottom: 10px;
 }
 .forgot-pass{
     display: flex;
     justify-content: end;
     color: var(--eco-green);
     cursor: pointer;
+    padding: 10px 0;
 }
 .forgot-pass p:hover{
     color: var(--trust-blue);
@@ -201,6 +204,7 @@
         display: flex;
         justify-content: center;
         font-size: 14px;
+        padding: 14px 0;
     }
 
     .forgot-pass p:hover{

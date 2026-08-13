@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { label: "How it Works", to: "/how-it-works" },
   { label: "Features", to: "/features" },
   { label: "Pricing", to: "/pricing" },
-  { label: "Login", to: "/login" },
+  // { label: "Login", to: "/login" },
 ];
 
 const Navbar = () => {
@@ -23,7 +23,7 @@ const Navbar = () => {
       <div className="navbar-inner">
         <Link to="/" className="navbar-logo" onClick={closeMenu}>
           <FontAwesomeIcon icon={faLeaf} className="navbar-logo-icon" />
-          <span>WastePal</span>
+          <span>ReNexa</span>
         </Link>
 
         <nav className={`navbar-links ${menuOpen ? "navbar-links--open" : ""}`}>

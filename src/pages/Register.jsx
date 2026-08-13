@@ -1,20 +1,25 @@
 import "../styles/Register.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faLeaf } from '@fortawesome/free-solid-svg-icons';
+import Link from "../router/Link";
 
 const Register = () => {
   return (
     <main className='register-container'>
-        <h1>Register As</h1>
+        <div className="auth-logo">
+          <FontAwesomeIcon icon={faLeaf} className="auth-logo-icon" />
+          <span>ReNexa</span>
+        </div>
+        <h1>Register as</h1>
         <section className="profile-select-container">
-            <button className="profile-btn">
+            <Link to="/signup" className="profile-btn">
                 <FontAwesomeIcon icon={faUser} className="icon"/>
                 <p>User</p>
-            </button>
-            <button className='profile-btn'>
+            </Link>
+            <Link to="/wastepickersignup" className='profile-btn'>
                 <FontAwesomeIcon icon={faUser} className="icon"/>
                 <p>Waste Picker</p>
-            </button>
+            </Link>
             <button className="trouble-registering">Having Trouble Registering?</button>
         </section>
     </main>

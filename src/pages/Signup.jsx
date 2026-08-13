@@ -34,7 +34,7 @@ const Signup = () => {
     setSubmitting(true);
     setTimeout(() => {
       setSubmitting(false);
-      navigate("/dashboard");
+      navigate("/Register");
     }, 700);
   };
 
@@ -43,7 +43,7 @@ const Signup = () => {
       <div className="auth-card">
         <div className="auth-logo">
           <FontAwesomeIcon icon={faLeaf} className="auth-logo-icon" />
-          <span>WastePal</span>
+          <span>Renexa</span>
         </div>
         <h1>Create your account</h1>
         <p className="auth-subtitle">Start optimizing your waste management today.</p>
@@ -101,8 +101,9 @@ const Signup = () => {
           {errors.agree && <em className="field-error">{errors.agree}</em>}
 
           <button type="submit" className="btn btn-primary btn-block" disabled={submitting}>
-            {submitting ? "Creating account..." : "Create Account"}
+            {submitting ? "Registering..." : "Sign up"}
           </button>
+          <button type="submit" className="btn btn-primary btn-block">Or Continue with Google</button>
         </form>
 
         <p className="auth-footer">

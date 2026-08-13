@@ -3,15 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faLocationDot, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 const INITIAL_PROFILE = {
-  firstName: "Sarah",
+  firstName: "Esther",
   lastName: "Reyes",
-  email: "sarah.reyes@example.com",
-  phone: "(555) 018-2354",
+  email: "esther.reyes@example.com",
+  phone: "080-0123-4567",
 };
 
 const ADDRESSES = [
-  { label: "Home (Default)", address: "123 Elm Way, Greenville, CA" },
-  { label: "Office", address: "456 Corporate Blvd, Metropolis, NY" },
+  { label: "Home (Default)", address: "123 Elm Way, Lagos, Nigeria" },
+  { label: "Office", address: "456 Corporate estate, Abuja, Nigeria" },
 ];
 
 const DashboardSettings = () => {

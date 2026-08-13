@@ -141,6 +141,15 @@
   text-decoration: underline;
 }
 
+.auth-divider{
+  display: block;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 20px 0;
+  color: var(--eco-green);
+}
+
 @media screen and (max-width: 480px) {
   .auth-page {
     padding: 20px;

@@ -12,6 +12,7 @@ import {
   faArrowRightFromBracket,
   faBell,
   faCircleCheck,
+  faEllipsis
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "../router/Router";
 import DashboardOverview from "../components/DashboardOverview";
@@ -89,7 +90,7 @@ const Dashboard = () => {
         onClick={() => setSidebarOpen((open) => !open)}
         aria-label="Toggle navigation"
       >
-        <FontAwesomeIcon icon={faGaugeHigh} />
+        <FontAwesomeIcon icon={faEllipsis} />
         <span>Menu</span>
       </button>
 
@@ -97,7 +98,7 @@ const Dashboard = () => {
         <div className="dash-logo">
           <FontAwesomeIcon icon={faLeaf} className="dash-logo-icon" />
           <div>
-            <p>WastePal</p>
+            <p>Renexa</p>
             <span>Business Plan</span>
           </div>
         </div>
@@ -125,7 +126,7 @@ const Dashboard = () => {
       <div className="dash-main">
         <header className="dash-topbar">
           <div>
-            <h1>{activeView === "settings" ? "Settings" : `Hello, Sarah`}</h1>
+            <h1>{activeView === "settings" ? "Settings" : `Hello, Esther`}</h1>
             <p>
               {activeView === "settings"
                 ? "Manage your personal information, addresses, and account preferences."
@@ -137,7 +138,7 @@ const Dashboard = () => {
               <FontAwesomeIcon icon={faBell} />
             </button>
             <div className="dash-avatar" aria-hidden="true">
-              S
+              E
             </div>
           </div>
         </header>
