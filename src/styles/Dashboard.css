@@ -695,3 +695,9 @@
     padding-right:4px;
   }
 }
+
+.support-link{
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 12px;
+}
