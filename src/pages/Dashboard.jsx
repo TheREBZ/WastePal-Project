@@ -48,7 +48,8 @@ const PLACEHOLDER_COPY = {
   },
   support: {
     title: "Support",
-    desc: "Reach our team or browse help articles about your account and pickups.",
+    desc: `Reach our team or browse helpful articles about your account and pickups.
+    <a href="https://kcemma.dedyn.io/webhook/5785de04-d0c1-449e-9e77-204560674434/chat" class="support-link btn-block btn btn-primary" target="_blank">Click here to speak with our support agent</a>`,
   },
 };
 
@@ -77,7 +78,7 @@ const Dashboard = () => {
           <FontAwesomeIcon icon={faCircleCheck} />
         </span>
         <h2>{copy.title}</h2>
-        <p>{copy.desc}</p>
+        <p dangerouslySetInnerHTML={{__html: copy.desc}}></p>
       </div>
     );
   };

@@ -588,6 +588,13 @@
   margin-top: 24px;
 }
 
+.support-link{
+  display: block;
+  padding: 15px 0;
+  margin: 30px 0;
+}
+
+
 /* Responsive */
 @media screen and (max-width: 1024px) {
   .dash-cards {
