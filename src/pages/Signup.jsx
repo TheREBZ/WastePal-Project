@@ -123,7 +123,7 @@ const Signup = () => {
 
     setTimeout(() => {
       setSubmitting(false);
-      navigate("/Register");
+      navigate("/register");
     }, 700);
   };
 

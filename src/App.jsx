@@ -24,7 +24,7 @@ import AdminEventLog from "./pages/AdminEventLog";
 
 const ROUTES = {
   "/": Home,
-  "/Register": Register,
+  "/register": Register,
   "/signup": Signup,
   "/forgot-password": ForgotPassword,
   "/wastepickersignup": WastePickerSignup,
