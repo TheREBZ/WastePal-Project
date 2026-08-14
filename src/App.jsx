@@ -14,11 +14,19 @@ import Contact from "./pages/Contact";
 import Dashboard from "./pages/Dashboard";
 import WastePickerSignup from "./pages/WastePickerSignup";
 import AdminPickerDash from "./pages/AdminPickerDash";
+import ForgotPassword from "./pages/ForgotPassword";
+import VerifyEmail from "./pages/VerifyEmail";
+import ResetPassword from "./pages/ResetPassword";
+import RegisterAs from "./pages/RegisterAs";
+import HouseholdProfile from "./pages/HouseholdProfile";
+import BusinessProfile from "./pages/BusinessProfile";
+import AdminEventLog from "./pages/AdminEventLog";
 
 const ROUTES = {
   "/": Home,
   "/Register": Register,
   "/signup": Signup,
+  "/forgot-password": ForgotPassword,
   "/wastepickersignup": WastePickerSignup,
   "/login": Login,
   "/features": Features,
@@ -28,6 +36,12 @@ const ROUTES = {
   "/contact": Contact,
   "/dashboard": Dashboard,
   "/adminpicker": AdminPickerDash,
+  "/verify-email": VerifyEmail,
+  "/reset-password": ResetPassword,
+  "/register-as": RegisterAs,
+  "/household-profile": HouseholdProfile,
+  "/business-profile": BusinessProfile,
+  "/adminevents": AdminEventLog,
 };
 
 const AppRoutes = () => {

@@ -12,7 +12,7 @@ const Register = () => {
         </div>
         <h1>Register as</h1>
         <section className="profile-select-container">
-            <Link to="/signup" className="profile-btn">
+            <Link to="/register-as" className="profile-btn">
                 <FontAwesomeIcon icon={faUser} className="icon"/>
                 <p>User</p>
             </Link>
