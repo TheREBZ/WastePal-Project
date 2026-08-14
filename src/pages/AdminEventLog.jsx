@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faLeaf,
+  faClipboardList,
+  faUsers,
+  faTruck,
+  faChartLine,
+  faGear,
+  faFileLines,
   faCalendarDays,
   faMagnifyingGlass,
   faCircleCheck,
@@ -85,7 +90,6 @@ const EVENTS = [
 ];
 
 const NAV_ITEMS = [
-  { key: "overview", label: "Overview", icon: faGaugeHigh },
   { key: "events", label: "Event Logs", icon: faClipboardList },
   { key: "users", label: "Users", icon: faUsers },
   { key: "pickers", label: "Pickers", icon: faTruck },
