@@ -1,0 +1,14 @@
+.recycling {
+  background: #fff;
+  border: 1px solid var(--border-grey);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.recycling h1 {
+  margin-bottom: 10px;
+}
+
+.recycling p {
+  color: var(--text-muted);
+}

@@ -1,0 +1,34 @@
+.review-booking {
+  background: #fff;
+  border: 1px solid var(--border-grey);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.review-booking h1 {
+  margin-bottom: 15px;
+}
+
+.review-booking ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 15px 0;
+}
+
+.review-booking li {
+  margin: 6px 0;
+  color: var(--text-muted);
+}
+
+.review-booking .btn {
+  background: var(--bg-mint);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.review-booking .btn:hover {
+  background: var(--danger);
+  color: #fff;
+}

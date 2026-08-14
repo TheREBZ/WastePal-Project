@@ -1,0 +1,40 @@
+.book-pickup {
+  background: var(--bg-mint-soft);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.book-pickup h1 {
+  margin-bottom: 15px;
+}
+
+.book-pickup form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.book-pickup label {
+  font-weight: bold;
+  color: var(--text-muted);
+}
+
+.book-pickup input,
+.book-pickup select {
+  padding: 8px;
+  border: 1px solid var(--border-grey);
+  border-radius: 4px;
+}
+
+.book-pickup .btn {
+  background: var(--bg-mint);
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.book-pickup .btn:hover {
+  background: var(--danger);
+  color: #fff;
+}

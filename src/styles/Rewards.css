@@ -1,0 +1,14 @@
+.rewards {
+  background: var(--bg-grey);
+  border: 1px solid var(--border-grey);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.rewards h1 {
+  margin-bottom: 10px;
+}
+
+.rewards p {
+  color: var(--text-muted);
+}
