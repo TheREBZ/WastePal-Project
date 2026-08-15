@@ -1,5 +1,5 @@
 import React from "react";
-import "./Recycling.css";
+import "../styles/Recycling.css";
 
 const Recycling = () => {
   return (

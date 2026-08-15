@@ -1,5 +1,5 @@
 import React from "react";
-import "./BookPickup.css";
+import "../styles/BookPickup.css";
 
 const BookPickup = () => {
   return (

@@ -16,7 +16,7 @@ import BookPickup from "./pages/BookPickup";
 import ReviewBooking from "./pages/ReviewBooking";
 import Rewards from "./pages/Rewards";
 import Recycling from "./pages/Recycling";
-import RewardBookings from "./pages/RewardBookings";
+// import RewardBookings from "./pages/RewardBookings";
 
 const ROUTES = {
   "/": Home,
@@ -29,11 +29,11 @@ const ROUTES = {
   "/signup": Signup,
   "/register": Register,
   "/dashboard": Dashboard,
-  "/bookpickup": BookPickup,
-  "/reviewbooking": ReviewBooking,
+  "/book-pickup": BookPickup,
+  "/review-booking": ReviewBooking,
   "/rewards": Rewards,
   "/recycling": Recycling,
-  "/rewardbookings": RewardBookings,
+  // "/rewardbookings": RewardBookings,
 };
 
 const AppRoutes = () => {

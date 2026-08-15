@@ -1,5 +1,5 @@
 import React from "react";
-import "./Rewards.css";
+import "../styles/Rewards.css";
 
 const Rewards = () => {
   return (
