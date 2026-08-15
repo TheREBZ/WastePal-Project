@@ -6,12 +6,16 @@ import {
   faTruck,
   faGift,
   faRecycle,
+  faChevronDown,
+  faRobot,
+  faArrowUpRightFromSquare,
   faFileLines,
   faHeadset,
   faGear,
   faArrowRightFromBracket,
   faBell,
   faCircleCheck,
+  faEllipsis
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "../router/Router";
 import DashboardOverview from "../components/DashboardOverview";
@@ -41,7 +45,12 @@ const PLACEHOLDER_COPY = {
   recycling: {
     title: "Recycling",
     desc: "Coming soon, this feature will be available in our next phase.",
-  }
+  },
+  support: {
+    title: "Support",
+    desc: `Reach our team or browse helpful articles about your account and pickups.
+    <a href="https://kcemma.dedyn.io/webhook/5785de04-d0c1-449e-9e77-204560674434/chat" class="support-link btn-block btn btn-primary" target="_blank">Click here to speak with our support agent</a>`,
+  },
 };
 const SAMPLE_REPORTS = [
   {
@@ -51,8 +60,7 @@ const SAMPLE_REPORTS = [
     wasteDiverted: "22 kg",
     recyclingRate: "43%",
     status: "Pending",
-    details:
-      "From your 1 pickup this month. plastics made up the largest share. No contamination flags on your bins.",
+    details: "From your 1 pickup this month. plastics made up the largest share. No contamination flags on your bins.",
   },
   {
     id: "rpt-2026-07",
@@ -61,8 +69,7 @@ const SAMPLE_REPORTS = [
     wasteDiverted: "42 kg",
     recyclingRate: "78%",
     status: "Complete",
-    details:
-      "From your 3 pickups this month. Paper and cardboard made up the largest share, followed by mixed plastics. No contamination flags on your bins.",
+    details: "From your 3 pickups this month. Paper and cardboard made up the largest share, followed by mixed plastics. No contamination flags on your bins.",
   },
   {
     id: "rpt-2026-06",
@@ -71,18 +78,7 @@ const SAMPLE_REPORTS = [
     wasteDiverted: "37 kg",
     recyclingRate: "74%",
     status: "Complete",
-    details:
-      "From your 3 pickups this month. Glass volume was up compared to May. One pickup was rescheduled due to a public holiday.",
-  },
-  {
-    id: "rpt-2026-05",
-    period: "May 2026",
-    generatedOn: "Jun 1, 2026",
-    wasteDiverted: "31 kg",
-    recyclingRate: "71%",
-    status: "Complete",
-    details:
-      "From your 2 pickups this month. You dropped off e-waste for the first time, adding 4 kg toward your total diverted.",
+    details: "From your 3 pickups this month. Glass volume was up compared to May. One pickup was rescheduled due to a public holiday.",
   },
 ];
 
@@ -208,7 +204,7 @@ const renderSupport = () => (
           <FontAwesomeIcon icon={faCircleCheck} />
         </span>
         <h2>{copy.title}</h2>
-        <p>{copy.desc}</p>
+        <p dangerouslySetInnerHTML={{__html: copy.desc}}></p>
       </div>
     );
   };
@@ -221,7 +217,7 @@ const renderSupport = () => (
         onClick={() => setSidebarOpen((open) => !open)}
         aria-label="Toggle navigation"
       >
-        <FontAwesomeIcon icon={faGaugeHigh} />
+        <FontAwesomeIcon icon={faEllipsis} />
         <span>Menu</span>
       </button>
 
@@ -229,7 +225,7 @@ const renderSupport = () => (
         <div className="dash-logo">
           <FontAwesomeIcon icon={faLeaf} className="dash-logo-icon" />
           <div>
-            <p>WastePal</p>
+            <p>Renexa</p>
             <span>Business Plan</span>
           </div>
         </div>
@@ -257,7 +253,7 @@ const renderSupport = () => (
       <div className="dash-main">
         <header className="dash-topbar">
           <div>
-            <h1>{activeView === "settings" ? "Settings" : `Hello, Sarah`}</h1>
+            <h1>{activeView === "settings" ? "Settings" : `Hello, Esther`}</h1>
             <p>
               {activeView === "settings"
                 ? "Manage your personal information, addresses, and account preferences."
@@ -269,7 +265,7 @@ const renderSupport = () => (
               <FontAwesomeIcon icon={faBell} />
             </button>
             <div className="dash-avatar" aria-hidden="true">
-              S
+              E
             </div>
           </div>
         </header>

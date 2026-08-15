@@ -81,6 +81,7 @@ const Login = () => {
           <button type="submit" className="btn btn-primary btn-block" disabled={submitting}>
             {submitting ? "Logging in..." : "Login"}
           </button>
+          <button type="submit" className="btn btn-primary btn-block">Login with Google</button>
         </form>
 
         <p className="auth-footer">

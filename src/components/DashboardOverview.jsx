@@ -6,23 +6,23 @@ const CHART_DATA = [30, 55, 42, 68, 48, 72, 60];
 const BOOKINGS = [
   {
     date: "Nov 19, 2024",
-    time: "08:00 AM - 10:00 AM",
-    type: "Recyclables",
-    location: "Main Office",
+    time: "08:00 AM",
+    type: "Paper",
+    location: "Office",
     status: "Confirmed",
   },
   {
     date: "Nov 22, 2024",
-    time: "01:00 PM - 03:00 PM",
+    time: "01:00 PM",
     type: "E-Waste",
-    location: "Warehouse A",
+    location: "Warehouse",
     status: "Confirmed",
   },
   {
     date: "Nov 28, 2024",
-    time: "09:00 AM - 11:00 AM",
-    type: "General",
-    location: "Main Office",
+    time: "09:00 AM",
+    type: "Plastic",
+    location: "Market",
     status: "Pending",
   },
 ];
@@ -78,21 +78,21 @@ const DashboardOverview = ({ onNavigate }) => {
           <table className="dash-table">
             <thead>
               <tr>
-                <th>Date &amp; Time</th>
-                <th>Waste Type</th>
-                <th>Location</th>
-                <th>Status</th>
+                <th className="date-time">Date &amp; Time</th>
+                <th className="waste-type">Waste Type</th>
+                <th className="location">Location</th>
+                <th className="status">Status</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="dash-table-body">
               {BOOKINGS.map((booking) => (
                 <tr key={booking.date}>
                   <td>
                     <p className="dash-table-primary">{booking.date}</p>
                     <p className="dash-table-secondary">{booking.time}</p>
                   </td>
-                  <td>{booking.type}</td>
-                  <td>{booking.location}</td>
+                  <td><p className="dash-table-type">{booking.type}</p></td>
+                  <td><p className="dash-table-location">{booking.location}</p></td>
                   <td>
                     <span
                       className={`dash-status ${

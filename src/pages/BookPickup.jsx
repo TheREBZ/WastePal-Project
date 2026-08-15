@@ -4,8 +4,8 @@ import "../styles/BookPickup.css";
 
 const initialForm = {
   wasteType: "Plastic",
-  address: "12 Oba street, Lagos Island",
-  quantity: 2,
+  address: "",
+  quantity: 1,
   date: "",
   time: "",
 };
@@ -25,14 +25,14 @@ const BookPickup = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     sessionStorage.setItem("wastepal-booking", JSON.stringify(formData));
-    navigate("/reviewbooking");
+    navigate("/review-booking");
   };
 
   return (
-    <div className="auth-page">
-      <div className="auth-card">
+    <div className="book-pickup-overall-page">
+      <div className="auth-card book-pickup-container" >
         <h1>Book Waste Collection</h1>
-        <p>Fill in the details to schedule a pickup</p>
+        <p className="select-header">Fill in the details to schedule a pickup</p>
         <form onSubmit={handleSubmit}>
           <label htmlFor="wasteType">Select Waste Type</label>
           <select id="wasteType" name="wasteType" value={formData.wasteType} onChange={handleChange}>
@@ -45,7 +45,7 @@ const BookPickup = () => {
           </select>
 
           <label htmlFor="address">Pickup Address</label>
-          <input id="address" name="address" type="text" value={formData.address} onChange={handleChange} />
+          <textarea id="address" name="address" type="text" value={formData.address} onChange={handleChange} />
 
           <label htmlFor="quantity">Quantity</label>
           <input id="quantity" name="quantity" type="number" min="1" value={formData.quantity} onChange={handleChange} />

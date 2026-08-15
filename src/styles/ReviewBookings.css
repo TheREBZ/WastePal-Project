@@ -1,57 +1,7 @@
-.review-booking {
-  background: #fff;
-  border: 1px solid var(--border-grey);
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 420px;
-}
-
-.review-booking h1 {
-  margin-bottom: 15px;
-}
-
-.review-booking ul {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 15px 0;
-}
-
-.review-booking li {
-  margin: 6px 0;
-  color: var(--text-muted);
-}
-
-.review-booking .btn {
-  background: var(--bg-mint);
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.review-booking .btn:hover {
-  background: var(--danger);
-  color: #fff;
-}
-
-
-/* Mobile responsiveness */
-@media (max-width: 365px) {
-  .review-booking {
-    padding: 15px;
-  }
-
-  .review-booking h1 {
-    font-size: 1.2rem;
-    text-align: center;
-  }
-
-  .review-booking ul {
-    font-size: 0.9rem;
-  }
-
-  .review-booking .btn {
-    width: 100%;
-    font-size: 1rem;
-  }
+.review-booking-card{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }

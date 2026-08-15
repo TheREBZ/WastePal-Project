@@ -10,15 +10,14 @@ const Footer = () => {
         <div className="footer-brand">
           <div className="footer-logo">
             <FontAwesomeIcon icon={faLeaf} className="footer-logo-icon" />
-            <span>WastePal</span>
+            <span>Renexa</span>
           </div>
-          <p>© {new Date().getFullYear()} WastePal. Eco-friendly waste management solutions.</p>
+          <p>© {new Date().getFullYear()} Renexa. Eco-friendly waste management solutions.</p>
         </div>
         <nav className="footer-links">
           <Link to="/privacy">Privacy Policy</Link>
           <Link to="/terms">Terms of Service</Link>
           <Link to="/contact">Contact Us</Link>
-          <Link to="/careers">Careers</Link>
         </nav>
       </div>
     </footer>

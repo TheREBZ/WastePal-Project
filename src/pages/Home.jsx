@@ -30,7 +30,7 @@ const Home = () => {
               Smarter waste management for a <span>greener city.</span>
             </h1>
             <p>
-              WastePal connects modern businesses and communities with efficient,
+              Renexa connects modern businesses and communities with efficient,
               tech-enabled pickup services. Reduce your footprint, track your
               recycling, and help build a sustainable future effortlessly.
             </p>

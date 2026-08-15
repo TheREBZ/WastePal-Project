@@ -5,6 +5,7 @@ import "../styles/ReviewBookings.css";
 const ReviewBooking = () => {
   const { navigate } = useRouter();
   const [booking, setBooking] = useState(null);
+  const [isConfirmed, setIsConfirmed] = useState(false);
 
   useEffect(() => {
     const savedBooking = sessionStorage.getItem("wastepal-booking");
@@ -14,8 +15,11 @@ const ReviewBooking = () => {
   }, []);
 
   const handleConfirm = () => {
+    setIsConfirmed(true);
+    setTimeout(() => {
     sessionStorage.removeItem("wastepal-booking");
     navigate("/dashboard");
+    }, 1500);
   };
 
   if (!booking) {
@@ -34,16 +38,16 @@ const ReviewBooking = () => {
 
   return (
     <div className="auth-page">
-      <div className="auth-card">
+      <div className="auth-card review-booking-card">
         <h1>Review Booking</h1>
-        <ul>
-          <li><strong>Waste Type:</strong> {booking.wasteType}</li>
-          <li><strong>Pickup Address:</strong> {booking.address}</li>
-          <li><strong>Quantity:</strong> {booking.quantity} {booking.quantity > 1 ? "Bags" : "Bag"}</li>
-          <li><strong>Date:</strong> {booking.date || "Not set"}</li>
-          <li><strong>Time:</strong> {booking.time || "Not set"}</li>
-        </ul>
-        <button type="button" className="btn btn-block btn-primary" onClick={handleConfirm}>Confirm Booking</button>
+          <p><strong>Waste Type:</strong> </p>
+          <p>{booking.wasteType}</p>
+          <p><strong>Pickup Address:</strong></p>
+          <p>{booking.address}</p>
+          <p><strong>Quantity:</strong> {booking.quantity} {booking.quantity > 1 ? "Bags" : "Bag"}</p>
+          <p><strong>Date:</strong> {booking.date || "Not set"}</p>
+          <p><strong>Time:</strong> {booking.time || "Not set"}</p>
+        <button type="button" className="btn btn-block btn-primary" onClick={handleConfirm} disabled={isConfirmed}>{isConfirmed ? "Confirmed" : "Confirm Booking"}</button>
       </div>
     </div>
   );

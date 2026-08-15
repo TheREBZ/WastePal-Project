@@ -5,11 +5,13 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 24px;
+    gap: 18px;
+    background: linear-gradient(160deg, var(--bg-mint) 0%, var(--white) 55%, var(--bg-mint-soft) 100%);
 }
 
 .register-container h1{
     color: var(--charcoal-grey);
+    font-size: 24px;
 }
 
 .profile-select-container {
@@ -22,9 +24,7 @@
 .profile-btn {
     width: 398px;
     height: 266px;
-    border: 1px solid var(--eco-green);
     font-size: 26px;
-    background-color: transparent;
     font-weight: var(--fw-regular);
     display: flex;
     flex-direction: column;
@@ -34,6 +34,11 @@
     color: var(--charcoal-grey);
     flex-shrink: 4;
     flex-wrap: wrap;
+    text-decoration: none;
+    background-color: var(--white);
+    border: 1px solid var(--border-grey);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
 }
 
 .icon {
@@ -67,7 +72,7 @@
     .register-container {
         display: flex;
         flex-direction: column;
-        gap: 80px;
+        gap: 20px;
         justify-content: flex-start;
         padding-top: 80px;
     }
@@ -76,13 +81,11 @@
         font-size: 26px;
     }
     
-    .profile-btn {
+    .profile-btn{
         max-width: 300px;
         height: 190px;
         font-size: 25px;
         border-radius: 20px;
-        border: 2px solid var(--eco-green);
-        background-color: none;
         font-weight: var(--fw-regular);
     }
 
