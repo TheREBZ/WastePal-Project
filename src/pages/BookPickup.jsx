@@ -1,12 +1,13 @@
 import React from "react";
-import "./BookPickup.css";
+import "../styles/BookPickup.css";
 
 const BookPickup = () => {
   return (
     <div className="book-pickup">
       <h1>Book Waste Collection</h1>
+      <p>Fill in the details to schedule a pickup</p>
       <form>
-        <label>Waste Type</label>
+        <label>Select Waste Type</label>
         <select>
           <option>Plastic</option>
           <option>Paper</option>

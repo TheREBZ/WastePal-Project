@@ -40,7 +40,8 @@ const PLACEHOLDER_COPY = {
   recycling: {
     title: "Recycling",
     desc: "See a breakdown of everything you've recycled, sorted by material type.",
-  };
+  }
+};
 const SAMPLE_REPORTS = [
   {
     id: "rpt-2026-08",

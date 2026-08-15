@@ -33,3 +33,25 @@
   background: var(--danger);
   color: #fff;
 }
+
+
+/* Mobile responsiveness */
+@media (max-width: 365px) {
+  .review-booking {
+    padding: 15px;
+  }
+
+  .review-booking h1 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .review-booking ul {
+    font-size: 0.9rem;
+  }
+
+  .review-booking .btn {
+    width: 100%;
+    font-size: 1rem;
+  }
+}
