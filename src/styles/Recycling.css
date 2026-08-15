@@ -1,0 +1,33 @@
+.recycling {
+  background: #fff;
+  border: 1px solid var(--border-grey);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.recycling h1 {
+  margin-bottom: 10px;
+}
+
+.recycling p {
+  color: var(--text-muted);
+}
+
+
+
+/* Mobile responsiveness */
+@media (max-width: 365px) {
+  .recycling {
+    padding: 15px;
+  }
+
+  .recycling h1 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .recycling p {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+}

@@ -1,0 +1,10 @@
+
+.book-pickup-overall-page{
+  display: flex;
+  justify-content: center;
+}
+
+.select-header{
+  color: var(--eco-green);
+  padding: 10px;
+}
