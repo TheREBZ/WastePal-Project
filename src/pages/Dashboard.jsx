@@ -16,6 +16,7 @@ import {
 import { useRouter } from "../router/Router";
 import DashboardOverview from "../components/DashboardOverview";
 import DashboardSettings from "../components/DashboardSettings";
+import BookPickup from "./BookPickup";
 import "../styles/Dashboard.css";
 
 const NAV_ITEMS = [
@@ -39,7 +40,7 @@ const PLACEHOLDER_COPY = {
   },
   recycling: {
     title: "Recycling",
-    desc: "See a breakdown of everything you've recycled, sorted by material type.",
+    desc: "Coming soon, this feature will be available in our next phase.",
   }
 };
 const SAMPLE_REPORTS = [
@@ -195,6 +196,7 @@ const renderSupport = () => (
   
   const renderContent = () => {
     if (activeView === "overview") return <DashboardOverview onNavigate={handleNav} />;
+    if (activeView === "book-pickup") return <BookPickup />;
     if (activeView === "settings") return <DashboardSettings />;
     if (activeView === "reports") return renderReports();
     if (activeView === "support") return renderSupport();

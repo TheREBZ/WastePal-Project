@@ -1,9 +1,24 @@
-.book-pickup {
+.auth-card h1 {
+  font-family: var(--manrope-primary);
+  font-weight: var(--fw-bold);
+  font-size: 24px;
+}
+
+.auth-card p {
+  font-weight: var(--fw-regular);
+  font-size: 14px;
+  text-align: center;
+  margin-top: -10px;
+}
+
+
+/* .book-pickup {
   background: var(--bg-mint-soft);
   padding: 20px;
   border-radius: 8px;
   
 }
+
 
 .book-pickup h1 {
   font-size: 34px;
@@ -52,7 +67,7 @@
 
 
 /* Mobile responsiveness */
-@media (max-width: 365px) {
+/* @media (max-width: 365px) {
   .book-pickup {
     padding: 15px;
   }
@@ -76,4 +91,4 @@
     width: 100%;
     font-size: 1rem;
   }
-}
+} */
