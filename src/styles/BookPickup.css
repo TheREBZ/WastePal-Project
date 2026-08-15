@@ -2,6 +2,7 @@
   background: var(--bg-mint-soft);
   padding: 20px;
   border-radius: 8px;
+  max-width: 420px;
 }
 
 .book-pickup h1 {
@@ -28,13 +29,17 @@
 
 .book-pickup .btn {
   background: var(--bg-mint);
-  border: none;
+  border: 1px solid;
   padding: 10px;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .book-pickup .btn:hover {
-  background: var(--danger);
+  background: var(--eco-green);
   color: #fff;
+}
+
+@media screen 320px {
+  
 }
