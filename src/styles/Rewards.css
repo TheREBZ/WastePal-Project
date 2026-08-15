@@ -12,3 +12,21 @@
 .rewards p {
   color: var(--text-muted);
 }
+
+
+/* Mobile responsiveness */
+@media (max-width: 365px) {
+  .rewards {
+    padding: 15px;
+  }
+
+  .rewards h1 {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .rewards p {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+}
