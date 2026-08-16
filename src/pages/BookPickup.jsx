@@ -5,7 +5,7 @@ import "../styles/BookPickup.css";
 const initialForm = {
   wasteType: "Plastic",
   address: "",
-  quantity: 1,
+  quantity: "1",
   date: "",
   time: "",
 };
@@ -35,7 +35,7 @@ const BookPickup = () => {
         <p className="select-header">Fill in the details to schedule a pickup</p>
         <form onSubmit={handleSubmit}>
           <label htmlFor="wasteType">Select Waste Type</label>
-          <select id="wasteType" name="wasteType" value={formData.wasteType} onChange={handleChange}>
+          <select className="book-options" id="wasteType" name="wasteType" value={formData.wasteType} onChange={handleChange}>
             <option>Plastic</option>
             <option>Paper</option>
             <option>E-waste</option>
@@ -45,16 +45,16 @@ const BookPickup = () => {
           </select>
 
           <label htmlFor="address">Pickup Address</label>
-          <textarea id="address" name="address" type="text" value={formData.address} onChange={handleChange} />
+          <textarea className="book-options-text" id="address" name="address" type="text" value={formData.address} onChange={handleChange} />
 
           <label htmlFor="quantity">Quantity</label>
-          <input id="quantity" name="quantity" type="number" min="1" value={formData.quantity} onChange={handleChange} />
+          <input className="book-options" id="quantity" name="quantity" type="number" min="1" value={formData.quantity} onChange={handleChange} />
 
           <label htmlFor="date">Date</label>
-          <input id="date" name="date" type="date" value={formData.date} onChange={handleChange} />
+          <input className="book-options" id="date" name="date" type="date" value={formData.date} onChange={handleChange} />
 
           <label htmlFor="time">Time</label>
-          <input id="time" name="time" type="time" value={formData.time} onChange={handleChange} />
+          <input className="book-options" id="time" name="time" type="time" value={formData.time} onChange={handleChange} />
 
           <button type="submit" className="btn btn-block btn-primary">Book Waste Pickup</button>
         </form>

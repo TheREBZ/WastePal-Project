@@ -1,10 +1,31 @@
+.book-options{
+  height: 30px;
+  border-radius: 8px;
+  padding-inline: 5px 0;
+}
+
+.book-options-text{
+  height: 50px;
+  border-radius: 8px;
+  padding: 5px 5px;
+}
 
 .book-pickup-overall-page{
   display: flex;
   justify-content: center;
 }
 
-.select-header{
+.book-pickup-container label{
   color: var(--eco-green);
-  padding: 10px;
+  font-weight: var(--fw-bold);
+}
+
+.book-pickup-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.select-header{
+  font-size: 14px;
 }

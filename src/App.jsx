@@ -21,6 +21,7 @@ import RegisterAs from "./pages/RegisterAs";
 import HouseholdProfile from "./pages/HouseholdProfile";
 import BusinessProfile from "./pages/BusinessProfile";
 import AdminEventLog from "./pages/AdminEventLog";
+import ReviewBooking from "./pages/ReviewBooking";
 
 const ROUTES = {
   "/": Home,
@@ -42,6 +43,7 @@ const ROUTES = {
   "/household-profile": HouseholdProfile,
   "/business-profile": BusinessProfile,
   "/adminevents": AdminEventLog,
+  "/review-booking": ReviewBooking,
 };
 
 const AppRoutes = () => {

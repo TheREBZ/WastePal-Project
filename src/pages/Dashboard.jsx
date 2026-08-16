@@ -7,8 +7,6 @@ import {
   faGift,
   faRecycle,
   faChevronDown,
-  faRobot,
-  faArrowUpRightFromSquare,
   faFileLines,
   faHeadset,
   faGear,
@@ -48,8 +46,7 @@ const PLACEHOLDER_COPY = {
   },
   support: {
     title: "Support",
-    desc: `Reach our team or browse helpful articles about your account and pickups.
-    <a href="https://kcemma.dedyn.io/webhook/5785de04-d0c1-449e-9e77-204560674434/chat" class="support-link btn-block btn btn-primary" target="_blank">Click here to speak with our support agent</a>`,
+    desc: "Reach our team or browse helpful articles about your account and pickups.",
   },
 };
 const SAMPLE_REPORTS = [
@@ -167,27 +164,9 @@ const Dashboard = () => {
   );
 
 const renderSupport = () => (
-    <div className="dash-panel dash-support-panel">
-      <span className="dash-placeholder-icon">
-        <FontAwesomeIcon icon={faRobot} />
-      </span>
-      <h2>Talk to Support</h2>
-      <p>Get help from our AI support assistant, any time your questions come up.</p>
-      <a
-        className="dash-support-btn"
-        href="#"
-        target="_blank"
-        rel="noreferrer"
-        aria-disabled="true"
-        onClick={(event) => {
-          // Remove this guard once the AI support URL is wired up above.
-          event.preventDefault();
-        }}
-      >
-        Open AI Support
-        <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
-      </a>
-    </div>
+      <div className="link-container">
+        <a href="https://kcemma.dedyn.io/webhook/5785de04-d0c1-449e-9e77-204560674434/chat" class="support-link btn-block btn btn-primary" target="_blank">Click here to speak with our support agent</a>
+      </div>
   );
   
   const renderContent = () => {
