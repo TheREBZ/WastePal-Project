@@ -588,6 +588,131 @@
   margin-top: 24px;
 }
 
+/* Reports */
+
+.reports-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.report-header-text {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.report-header-text h2 {
+  font-family: var(--manrope-primary);
+  font-size: 18px;
+  color: var(--charcoal-grey);
+  margin-bottom: 6px;
+}
+
+.report-header-text p {
+  max-width: 600px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.report-panel {
+  background-color: var(--white);
+  border: 1px solid var(--border-grey);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.report-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.dash-reports-table {
+  margin: 0;
+  min-width: 760px;
+}
+
+.dash-reports-table th {
+  padding: 14px 18px;
+  background-color: var(--bg-grey);
+  white-space: nowrap;
+}
+
+.dash-reports-table td {
+  padding: 15px 18px;
+}
+
+.dash-reports-row {
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.dash-reports-row:hover {
+  background-color: var(--bg-mint-soft);
+}
+
+.dash-reports-row--active {
+  background-color: var(--bg-mint-soft);
+}
+
+.dash-reports-row--active td {
+  border-bottom-color: transparent;
+}
+
+.dash-reports-chevron {
+  width: 45px;
+  text-align: right;
+}
+
+.dash-reports-toggle {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.dash-reports-toggle:hover {
+  background-color: var(--bg-mint);
+  color: var(--eco-green);
+}
+
+.dash-reports-toggle svg {
+  transition: transform 0.2s ease;
+}
+
+.dash-reports-chevron--open {
+  transform: rotate(180deg);
+}
+
+.dash-reports-details-row td {
+  padding: 0 18px 18px;
+  border-bottom: 1px solid var(--border-grey);
+}
+
+.dash-report-details {
+  padding: 14px 16px;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-grey);
+  color: var(--text-muted);
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+.reports-demo-notice {
+  padding: 10px 14px;
+  border: 1px solid var(--border-grey);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-mint-soft);
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
 /* Responsive */
 @media screen and (max-width: 1024px) {
   .dash-cards {

@@ -4,6 +4,7 @@ import {
   faLeaf,
   faGaugeHigh,
   faTruck,
+  faChevronDown,
   faGift,
   faRecycle,
   faFileLines,
@@ -40,7 +41,8 @@ const PLACEHOLDER_COPY = {
   recycling: {
     title: "Recycling",
     desc: "See a breakdown of everything you've recycled, sorted by material type.",
-  };
+  }
+};
 const SAMPLE_REPORTS = [
   {
     id: "rpt-2026-08",
@@ -104,67 +106,116 @@ const Dashboard = () => {
   };
 
   const renderReports = () => (
-    <div className="dash-panel dash-reports-panel">
-      <div className="dash-panel-header">
-        <h2>Your Reports</h2>
+    <div className="reports-container">
+      <div className="report-header-text">
+        <div>
+          <h2>Your Reports</h2>
+          <p>
+            A running record of your monthly recycling activity. Select a
+            report to view the full breakdown.
+          </p>
+        </div>
       </div>
-      <p className="dash-reports-intro">
-        A running record of your monthly recycling activity. Select a row for the full breakdown.
-      </p>
-
-      <table className="dash-table dash-reports-table">
-        <thead>
-          <tr>
-            <th>Period</th>
-            <th>Generated</th>
-            <th>Waste diverted</th>
-            <th>Recycling rate</th>
-            <th>Status</th>
-            <th aria-hidden="true"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {SAMPLE_REPORTS.map((report) => {
-            const isOpen = expandedReportId === report.id;
-            return (
-              <Fragment key={report.id}>
-                <tr
-                  className={`dash-reports-row ${isOpen ? "dash-reports-row--active" : ""}`}
-                  onClick={() => toggleReport(report.id)}
-                >
-                  <td className="dash-table-primary">{report.period}</td>
-                  <td>{report.generatedOn}</td>
-                  <td>{report.wasteDiverted}</td>
-                  <td>{report.recyclingRate}</td>
-                  <td>
-                    <span className="dash-status dash-status--confirmed">{report.status}</span>
-                  </td>
-                  <td className="dash-reports-chevron">
-                    <button
-                      type="button"
-                      className="dash-reports-toggle"
-                      aria-expanded={isOpen}
-                      aria-controls={`report-details-${report.id}`}
-                      aria-label={`${isOpen ? "Hide" : "Show"} details for ${report.period}`}
-                      onClick={(event) => {
-                        // Stop this from also bubbling to the row's onClick above,
-                        // which would toggle twice and appear to do nothing.
-                        event.stopPropagation();
-                        toggleReport(report.id);
-                      }}
+      <div className="reports-demo-notice">
+      <span>
+        These reports contain demo information for now. Real user data will be
+        displayed here once available.
+      </span>
+    </div>
+  
+      <div className="report-panel">
+        <div className="report-table-wrapper">
+          <table className="dash-table dash-reports-table">
+            <thead>
+              <tr>
+                <th>Period</th>
+                <th>Generated</th>
+                <th>Waste diverted</th>
+                <th>Recycling rate</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
+            </thead>
+  
+            <tbody>
+              {SAMPLE_REPORTS.map((report) => {
+                const isOpen = expandedReportId === report.id;
+  
+                return (
+                  <>
+                    <tr
+                      key={report.id}
+                      className={`dash-reports-row ${
+                        isOpen ? "dash-reports-row--active" : ""
+                      }`}
+                      onClick={() => toggleReport(report.id)}
                     >
-                      <FontAwesomeIcon icon={faChevronDown} className={isOpen ? "dash-reports-chevron--open" : ""} />
-                    </button>
-                  </td>
-                </tr>
-                <tr className="dash-reports-details-row" id={`report-details-${report.id}`} hidden={!isOpen}>
-                  <td colSpan={6}>{report.details}</td>
-                </tr>
-              </Fragment>
-            );
-          })}
-        </tbody>
-      </table>
+                      <td className="dash-table-primary">
+                        {report.period}
+                      </td>
+  
+                      <td>{report.generatedOn}</td>
+  
+                      <td>{report.wasteDiverted}</td>
+  
+                      <td>{report.recyclingRate}</td>
+  
+                      <td>
+                        <span
+                          className={`dash-status ${
+                            report.status === "Pending"
+                              ? "dash-status--pending"
+                              : "dash-status--confirmed"
+                          }`}
+                        >
+                          {report.status}
+                        </span>
+                      </td>
+  
+                      <td className="dash-reports-chevron">
+                        <button
+                          type="button"
+                          className="dash-reports-toggle"
+                          aria-expanded={isOpen}
+                          aria-controls={`report-details-${report.id}`}
+                          aria-label={`${
+                            isOpen ? "Hide" : "Show"
+                          } details for ${report.period}`}
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            toggleReport(report.id);
+                          }}
+                        >
+                          <FontAwesomeIcon
+                            icon={faChevronDown}
+                            className={
+                              isOpen
+                                ? "dash-reports-chevron--open"
+                                : ""
+                            }
+                          />
+                        </button>
+                      </td>
+                    </tr>
+  
+                    <tr
+                      className="dash-reports-details-row"
+                      id={`report-details-${report.id}`}
+                      hidden={!isOpen}
+                    >
+                      <td colSpan={6}>
+                        <div className="dash-report-details">
+                          {report.details}
+                        </div>
+                      </td>
+                    </tr>
+                  </>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   );
 
