@@ -1,31 +1,119 @@
-.book-options{
-  height: 30px;
-  border-radius: 8px;
-  padding-inline: 5px 0;
+.book-pickup-page {
+  width: 100%;
 }
 
-.book-options-text{
-  height: 50px;
-  border-radius: 8px;
-  padding: 5px 5px;
+.book-pickup-header {
+  margin-bottom: 20px;
 }
 
-.book-pickup-overall-page{
-  display: flex;
-  justify-content: center;
+.book-pickup-header h2 {
+  font-family: var(--manrope-primary);
+  font-size: 18px;
+  color: var(--charcoal-grey);
+  margin-bottom: 6px;
 }
 
-.book-pickup-container label{
-  color: var(--eco-green);
-  font-weight: var(--fw-bold);
+.book-pickup-header p {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
 }
 
-.book-pickup-container{
+.book-pickup-card {
+  width: 100%;
+  max-width: 760px;
+  background-color: var(--white);
+  border: 1px solid var(--border-grey);
+  border-radius: var(--radius-md);
+  padding: 28px;
+}
+
+.book-pickup-form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 18px;
 }
 
-.select-header{
-  font-size: 14px;
+.book-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.book-form-group label {
+  font-size: 12.5px;
+  font-weight: var(--fw-bold);
+  color: var(--charcoal-grey);
+}
+
+.book-form-group input,
+.book-form-group select,
+.book-form-group textarea {
+  width: 100%;
+  border: 1px solid var(--border-grey);
+  border-radius: var(--radius-sm);
+  background-color: var(--white);
+  color: var(--charcoal-grey);
+  font-family: var(--manrope-primary);
+  font-size: 13px;
+  transition: var(--transition);
+  box-sizing: border-box;
+}
+
+.book-form-group input,
+.book-form-group select {
+  height: 44px;
+  padding: 0 12px;
+}
+
+.book-form-group textarea {
+  min-height: 100px;
+  padding: 12px;
+  resize: vertical;
+}
+
+.book-form-group input:focus,
+.book-form-group select:focus,
+.book-form-group textarea:focus {
+  outline: none;
+  border-color: var(--eco-green);
+}
+
+.book-form-group input::placeholder,
+.book-form-group textarea::placeholder {
+  color: var(--text-muted);
+}
+
+.book-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.book-pickup-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+.book-pickup-actions .btn {
+  min-width: 170px;
+}
+
+@media screen and (max-width: 600px) {
+  .book-pickup-card {
+    padding: 20px;
+  }
+
+  .book-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .book-pickup-actions {
+    justify-content: stretch;
+  }
+
+  .book-pickup-actions .btn {
+    width: 100%;
+  }
 }

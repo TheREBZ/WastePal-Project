@@ -1,33 +1,19 @@
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTruck, faRecycle, faLeaf } from "@fortawesome/free-solid-svg-icons";
 
 const CHART_DATA = [30, 55, 42, 68, 48, 72, 60];
 
-const BOOKINGS = [
-  {
-    date: "Nov 19, 2024",
-    time: "08:00 AM",
-    type: "Paper",
-    location: "Office",
-    status: "Confirmed",
-  },
-  {
-    date: "Nov 22, 2024",
-    time: "01:00 PM",
-    type: "E-Waste",
-    location: "Warehouse",
-    status: "Confirmed",
-  },
-  {
-    date: "Nov 28, 2024",
-    time: "09:00 AM",
-    type: "Plastic",
-    location: "Market",
-    status: "Pending",
-  },
-];
-
 const DashboardOverview = ({ onNavigate }) => {
+  const [bookings, setBookings] = useState([]);
+
+  useEffect(() => {
+    const savedBookings = JSON.parse(
+      localStorage.getItem("wastepal-bookings") || "[]"
+    );
+
+    setBookings(savedBookings);
+  }, []);
   return (
     <div className="dash-overview">
       <div className="dash-cards">
@@ -85,28 +71,60 @@ const DashboardOverview = ({ onNavigate }) => {
               </tr>
             </thead>
             <tbody className="dash-table-body">
-              {BOOKINGS.map((booking) => (
-                <tr key={booking.date}>
+            {bookings.length > 0 ? (
+              bookings.map((booking) => (
+                <tr key={booking.id}>
                   <td>
-                    <p className="dash-table-primary">{booking.date}</p>
-                    <p className="dash-table-secondary">{booking.time}</p>
+                    <p className="dash-table-primary">
+                      {booking.date || "Date not set"}
+                    </p>
+                    <p className="dash-table-secondary">
+                      {booking.time || "Time not set"}
+                    </p>
                   </td>
-                  <td><p className="dash-table-type">{booking.type}</p></td>
-                  <td><p className="dash-table-location">{booking.location}</p></td>
+
+                  <td>
+                    <p className="dash-table-type">
+                      {booking.wasteType}
+                    </p>
+                  </td>
+
+                  <td>
+                    <p className="dash-table-location">
+                      {booking.address || "Address not provided"}
+                    </p>
+                  </td>
+
                   <td>
                     <span
                       className={`dash-status ${
-                        booking.status === "Confirmed" ? "dash-status--confirmed" : "dash-status--pending"
+                        booking.status === "Confirmed"
+                          ? "dash-status--confirmed"
+                          : "dash-status--pending"
                       }`}
                     >
                       {booking.status}
                     </span>
                   </td>
                 </tr>
-              ))}
-            </tbody>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="4" className="dash-empty-bookings">
+                  <p>No upcoming bookings yet.</p>
+                  <span>
+                    Schedule a pickup to see it here.
+                  </span>
+                </td>
+              </tr>
+            )}
+          </tbody>
           </table>
-          <button type="button" className="btn btn-primary" onClick={() => onNavigate("book-pickup")}>
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={() => onNavigate("book-pickup")}
+          >
             Schedule Pickup
           </button>
         </div>
