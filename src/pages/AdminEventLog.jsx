@@ -2,18 +2,12 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faClipboardList,
-  faUsers,
-  faTruck,
-  faChartLine,
-  faGear,
-  faFileLines,
   faCalendarDays,
   faMagnifyingGlass,
   faCircleCheck,
   faClock,
   faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
-import { useRouter } from "../router/Router";
 import "../styles/AdminEventLog.css";
 
 const EVENTS = [
@@ -89,35 +83,15 @@ const EVENTS = [
   },
 ];
 
-const NAV_ITEMS = [
-  { key: "events", label: "Event Logs", icon: faClipboardList },
-  { key: "users", label: "Users", icon: faUsers },
-  { key: "pickers", label: "Pickers", icon: faTruck },
-  { key: "performance", label: "Performance", icon: faChartLine },
-  { key: "reports", label: "Reports", icon: faFileLines },
-  { key: "settings", label: "Settings", icon: faGear },
-];
-
 const AdminEventLog = () => {
-  const { navigate } = useRouter();
   const [eventFilter, setEventFilter] = useState("all");
   const [search, setSearch] = useState("");
-
-  const handleNav = (key) => {
-    setActiveNav(key);
-    setSidebarOpen(false);
-
-    // Event Logs is currently the only admin section we're building.
-    if (key === "pickers") {
-      navigate("/adminpicker");
-    }
-  };
 
   const filteredEvents = EVENTS.filter((event) => {
     const matchesType =
       eventFilter === "all" || event.type === eventFilter;
 
-    const searchValue = search.toLowerCase();
+    const searchValue = search.toLowerCase().trim();
 
     const matchesSearch =
       event.description.toLowerCase().includes(searchValue) ||
@@ -129,19 +103,7 @@ const AdminEventLog = () => {
 
   return (
     <div className="admin-log-shell">
-
-      {/* Main */}
-
       <main className="admin-log-main">
-
-        <button
-          type="button"
-          className="admin-log-mobile-toggle"
-          onClick={() => setSidebarOpen((open) => !open)}
-        >
-          Menu
-        </button>
-
         <header className="admin-log-header">
           <div>
             <p className="admin-log-eyebrow">
@@ -165,7 +127,6 @@ const AdminEventLog = () => {
         {/* Summary Cards */}
 
         <section className="admin-log-summary">
-
           <div className="admin-log-card">
             <div className="admin-log-card-icon">
               <FontAwesomeIcon icon={faClipboardList} />
@@ -205,16 +166,15 @@ const AdminEventLog = () => {
             <strong>7</strong>
             <small>Requires attention</small>
           </div>
-
         </section>
 
         {/* Event Log */}
 
         <section className="admin-log-panel">
-
           <div className="admin-log-panel-header">
             <div>
               <h2>Activity Log</h2>
+
               <p>
                 Recent events recorded by the system.
               </p>
@@ -232,7 +192,6 @@ const AdminEventLog = () => {
           {/* Filters */}
 
           <div className="admin-log-filters">
-
             <div className="admin-log-search">
               <FontAwesomeIcon icon={faMagnifyingGlass} />
 
@@ -248,32 +207,36 @@ const AdminEventLog = () => {
               value={eventFilter}
               onChange={(e) => setEventFilter(e.target.value)}
             >
-              <option value="all">All Events</option>
+              <option value="all">
+                All Events
+              </option>
+
               <option value="booking_created">
                 Booking Created
               </option>
+
               <option value="booking_matched">
                 Booking Matched
               </option>
+
               <option value="pickup_completed">
                 Pickup Completed
               </option>
+
               <option value="payment_sale">
                 Payment
               </option>
+
               <option value="picker_activity">
                 Picker Activity
               </option>
             </select>
-
           </div>
 
           {/* Table */}
 
           <div className="admin-log-table-wrapper">
-
             <table className="admin-log-table">
-
               <thead>
                 <tr>
                   <th>Event</th>
@@ -286,11 +249,8 @@ const AdminEventLog = () => {
               </thead>
 
               <tbody>
-
                 {filteredEvents.map((event) => (
-
                   <tr key={event.id}>
-
                     <td>
                       <span className="admin-log-event-id">
                         {event.id}
@@ -316,8 +276,13 @@ const AdminEventLog = () => {
                     </td>
 
                     <td>
-                      <span>{event.time}</span>
-                      <small>{event.date}</small>
+                      <span>
+                        {event.time}
+                      </span>
+
+                      <small>
+                        {event.date}
+                      </small>
                     </td>
 
                     <td>
@@ -325,13 +290,9 @@ const AdminEventLog = () => {
                         {event.status}
                       </span>
                     </td>
-
                   </tr>
-
                 ))}
-
               </tbody>
-
             </table>
 
             {filteredEvents.length === 0 && (
@@ -339,16 +300,13 @@ const AdminEventLog = () => {
                 No events found.
               </div>
             )}
-
           </div>
-
         </section>
 
         <p className="admin-log-footer">
           Event data is currently displayed using mock data.
           Live event data will be connected to the backend later.
         </p>
-
       </main>
     </div>
   );
