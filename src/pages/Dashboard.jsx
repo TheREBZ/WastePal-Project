@@ -227,9 +227,9 @@ const renderSupport = () => (
 
       <aside className={`dash-sidebar ${sidebarOpen ? "dash-sidebar--open" : ""}`}>
         <div className="dash-logo">
-          <FontAwesomeIcon icon={faLeaf} className="dash-logo-icon" />
+          <img src="/assets/Horizontal-logo-2.png" alt="Renexa Logo" width={100} height={60} />
           <div>
-            <p>WastePal</p>
+            {/* <p>WastePal</p> */}
             <span>Business Plan</span>
           </div>
         </div>

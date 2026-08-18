@@ -21,9 +21,8 @@ const Navbar = () => {
   return (
     <header className="navbar">
       <div className="navbar-inner">
-        <Link to="/" className="navbar-logo" onClick={closeMenu}>
-          <FontAwesomeIcon icon={faLeaf} className="navbar-logo-icon" />
-          <span>WastePal</span>
+        <Link href="/" className="navbar-logo" onClick={closeMenu}>
+          <img src="/assets/Horizontal-logo-2.png" alt="Renexa Logo" width={100} height={60} />
         </Link>
 
         <nav className={`navbar-links ${menuOpen ? "navbar-links--open" : ""}`}>

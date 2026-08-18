@@ -114,7 +114,7 @@ const DashboardOverview = ({ onNavigate }) => {
         <div className="dash-panel dash-panel--impact">
           <h2>Impact Preview</h2>
           <span className="dash-impact-icon">
-            <FontAwesomeIcon icon={faLeaf} />
+            <img src="/assets/Icon only 2.png" alt="Renexa icon" className="hero-badge-icon" width={50} height={50} />
           </span>
           <p className="dash-impact-value">15</p>
           <p className="dash-impact-label">Trees saved this year</p>
@@ -125,7 +125,7 @@ const DashboardOverview = ({ onNavigate }) => {
               <span>CO2 offset</span>
             </div>
             <div>
-              <FontAwesomeIcon icon={faLeaf} />
+              <img src="/assets/Icon only 2.png" alt="Renexa icon" className="hero-badge-icon" width={50} height={50} />
               <p>1,085 L</p>
               <span>Water saved</span>
             </div>

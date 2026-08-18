@@ -39,8 +39,7 @@ const Login = () => {
     <main className="auth-page">
       <div className="auth-card">
         <div className="auth-logo">
-          <FontAwesomeIcon icon={faLeaf} className="auth-logo-icon" />
-          <span>WastePal</span>
+          <img src="/assets/Horizontal-logo-2.png" alt="Renexa Logo" width={100} height={60} />
         </div>
         <h1>Welcome Back</h1>
         <p className="auth-subtitle">Log in to manage your eco-impact.</p>

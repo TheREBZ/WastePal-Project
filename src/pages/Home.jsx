@@ -24,7 +24,8 @@ const Home = () => {
         <div className="hero-inner">
           <div className="hero-copy">
             <span className="hero-badge">
-              <FontAwesomeIcon icon={faLeaf} /> Eco-friendly Waste Solutions
+              <img src="/assets/Icon only 2.png" alt="Renexa icon" className="hero-badge-icon" width={50} height={50} />
+              Eco-friendly Waste Solutions
             </span>
             <h1>
               Smarter waste management for a <span>greener city.</span>
