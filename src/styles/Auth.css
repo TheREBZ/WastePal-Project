@@ -33,28 +33,6 @@
   color: var(--eco-green);
 }
 
-.auth-form-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 14px;
-}
-
-.auth-form-row .field {
-  min-width: 0;
-}
-
-.auth-form-row .field-with-icon {
-  width: 100%;
-  min-width: 0;
-  box-sizing: border-box;
-}
-
-.auth-form-row .field-with-icon input {
-  min-width: 0;
-  width: 100%;
-  box-sizing: border-box;
-}
-
 .auth-card h1 {
   text-align: center;
   font-size: 22px;
@@ -163,109 +141,6 @@
   text-decoration: underline;
 }
 
-.auth-divider{
-  display: block;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  margin: 20px 0;
-  color: var(--eco-green);
-}
-
-.forgot-success {
-  text-align: center;
-}
-
-.forgot-success-icon {
-  width: 58px;
-  height: 58px;
-  margin: 0 auto 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: var(--bg-mint-soft);
-  color: var(--eco-green);
-  font-size: 25px;
-  font-weight: var(--fw-bold);
-}
-
-.forgot-success strong {
-  color: var(--charcoal-grey);
-}
-
-.auth-inline-button {
-  border: none;
-  background: transparent;
-  padding: 0;
-  color: var(--eco-green);
-  font-family: var(--manrope-primary);
-  font-size: 13px;
-  font-weight: var(--fw-bold);
-  cursor: pointer;
-}
-
-.auth-inline-button:hover {
-  text-decoration: underline;
-  color: var(--trust-blue);
-}
-
-.register-options {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.register-option {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px;
-  border: 1px solid var(--border-grey);
-  border-radius: var(--radius-sm);
-  background-color: var(--white);
-  text-align: left;
-  cursor: pointer;
-  transition: 0.2s ease;
-}
-
-.register-option:hover {
-  border: 1px solid var(--eco-green);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
-  /* background-color: var(--eco-green); */
-}
-
-.register-option-icon {
-  width: 42px;
-  height: 42px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: var(--bg-mint-soft);
-  color: var(--eco-green);
-}
-
-.register-option-content {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.register-option-content strong {
-  font-size: 14px;
-  color: var(--charcoal-grey);
-}
-
-.register-option-content span {
-  font-size: 12px;
-  line-height: 1.4;
-  color: var(--text-muted);
-}
-
 @media screen and (max-width: 480px) {
   .auth-page {
     padding: 20px;
@@ -273,12 +148,5 @@
 
   .auth-card {
     padding: 28px 22px;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .auth-form-row {
-    grid-template-columns: 1fr;
-    gap: 0;
   }
 }

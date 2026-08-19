@@ -3,47 +3,36 @@ import "./styles/globals.css";
 import { RouterProvider, useRouter } from "./router/Router";
 
 import Home from "./pages/Home";
-import Register from "./pages/Register";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
 import Features from "./pages/Features";
 import HowItWorks from "./pages/HowItWorks";
 import Pricing from "./pages/Pricing";
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
-import WastePickerSignup from "./pages/WastePickerSignup";
-import AdminPickerDash from "./pages/AdminPickerDash";
-import ForgotPassword from "./pages/ForgotPassword";
-import VerifyEmail from "./pages/VerifyEmail";
-import ResetPassword from "./pages/ResetPassword";
-import RegisterAs from "./pages/RegisterAs";
-import HouseholdProfile from "./pages/HouseholdProfile";
-import BusinessProfile from "./pages/BusinessProfile";
-import AdminEventLog from "./pages/AdminEventLog";
+import BookPickup from "./pages/BookPickup";
 import ReviewBooking from "./pages/ReviewBooking";
+import Rewards from "./pages/Rewards";
+import Recycling from "./pages/Recycling";
+
 
 const ROUTES = {
   "/": Home,
-  "/register": Register,
-  "/signup": Signup,
-  "/forgot-password": ForgotPassword,
-  "/wastepickersignup": WastePickerSignup,
-  "/login": Login,
   "/features": Features,
   "/how-it-works": HowItWorks,
   "/pricing": Pricing,
   "/about": AboutUs,
   "/contact": Contact,
+  "/login": Login,
+  "/signup": Signup,
+  "/register": Register,
   "/dashboard": Dashboard,
-  "/adminpicker": AdminPickerDash,
-  "/verify-email": VerifyEmail,
-  "/reset-password": ResetPassword,
-  "/register-as": RegisterAs,
-  "/household-profile": HouseholdProfile,
-  "/business-profile": BusinessProfile,
-  "/adminevents": AdminEventLog,
+  "/book-pickup": BookPickup,
   "/review-booking": ReviewBooking,
+  "/rewards": Rewards,
+  "/recycling": Recycling,
 };
 
 const AppRoutes = () => {

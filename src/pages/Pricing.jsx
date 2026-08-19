@@ -6,8 +6,8 @@ import "../styles/Pricing.css";
 
 const PLANS = [
   {
-    name: "Basic",
-    price: "₦5,000",
+    name: "Free",
+    price: "$0",
     period: "/month",
     desc: "Perfect for individuals starting their eco-journey.",
     features: [
@@ -20,13 +20,13 @@ const PLANS = [
   },
   {
     name: "Household",
-    price: "₦12,000",
+    price: "$19",
     period: "/month",
     desc: "Ideal for families managing daily waste.",
     features: [
       "Advanced sorting guide",
       "Weekly scheduled pickups",
-      "Sorting guide provided",
+      "Compost bin provided",
       "Priority email support",
     ],
     cta: "Start Free Trial",
@@ -35,11 +35,11 @@ const PLANS = [
   },
   {
     name: "Business",
-    price: "₦30,000",
+    price: "$89",
     period: "/month",
     desc: "Tailored for small offices and retail spaces.",
     features: [
-      "Multiple waste dispose option",
+      "Commercial bin provision",
       "Bi-weekly bulk pickups",
       "Monthly sustainability reports",
       "Dedicated account manager",

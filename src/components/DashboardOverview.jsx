@@ -1,19 +1,33 @@
-import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTruck, faRecycle, faLeaf } from "@fortawesome/free-solid-svg-icons";
+import { faTruck, faRecycle } from "@fortawesome/free-solid-svg-icons";
 
 const CHART_DATA = [30, 55, 42, 68, 48, 72, 60];
 
+const BOOKINGS = [
+  {
+    date: "Nov 19, 2024",
+    time: "08:00 AM - 10:00 AM",
+    type: "Recyclables",
+    location: "Main Office",
+    status: "Confirmed",
+  },
+  {
+    date: "Nov 22, 2024",
+    time: "01:00 PM - 03:00 PM",
+    type: "E-Waste",
+    location: "Warehouse A",
+    status: "Confirmed",
+  },
+  {
+    date: "Nov 28, 2024",
+    time: "09:00 AM - 11:00 AM",
+    type: "General",
+    location: "Main Office",
+    status: "Pending",
+  },
+];
+
 const DashboardOverview = ({ onNavigate }) => {
-  const [bookings, setBookings] = useState([]);
-
-  useEffect(() => {
-    const savedBookings = JSON.parse(
-      localStorage.getItem("wastepal-bookings") || "[]"
-    );
-
-    setBookings(savedBookings);
-  }, []);
   return (
     <div className="dash-overview">
       <div className="dash-cards">
@@ -64,67 +78,35 @@ const DashboardOverview = ({ onNavigate }) => {
           <table className="dash-table">
             <thead>
               <tr>
-                <th className="date-time">Date &amp; Time</th>
-                <th className="waste-type">Waste Type</th>
-                <th className="location">Location</th>
-                <th className="status">Status</th>
+                <th>Date &amp; Time</th>
+                <th>Waste Type</th>
+                <th>Location</th>
+                <th>Status</th>
               </tr>
             </thead>
-            <tbody className="dash-table-body">
-            {bookings.length > 0 ? (
-              bookings.map((booking) => (
-                <tr key={booking.id}>
+            <tbody>
+              {BOOKINGS.map((booking) => (
+                <tr key={booking.date}>
                   <td>
-                    <p className="dash-table-primary">
-                      {booking.date || "Date not set"}
-                    </p>
-                    <p className="dash-table-secondary">
-                      {booking.time || "Time not set"}
-                    </p>
+                    <p className="dash-table-primary">{booking.date}</p>
+                    <p className="dash-table-secondary">{booking.time}</p>
                   </td>
-
-                  <td>
-                    <p className="dash-table-type">
-                      {booking.wasteType}
-                    </p>
-                  </td>
-
-                  <td>
-                    <p className="dash-table-location">
-                      {booking.address || "Address not provided"}
-                    </p>
-                  </td>
-
+                  <td>{booking.type}</td>
+                  <td>{booking.location}</td>
                   <td>
                     <span
                       className={`dash-status ${
-                        booking.status === "Confirmed"
-                          ? "dash-status--confirmed"
-                          : "dash-status--pending"
+                        booking.status === "Confirmed" ? "dash-status--confirmed" : "dash-status--pending"
                       }`}
                     >
                       {booking.status}
                     </span>
                   </td>
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="4" className="dash-empty-bookings">
-                  <p>No upcoming bookings yet.</p>
-                  <span>
-                    Schedule a pickup to see it here.
-                  </span>
-                </td>
-              </tr>
-            )}
-          </tbody>
+              ))}
+            </tbody>
           </table>
-          <button
-            type="button"
-            className="btn btn-primary"
-            onClick={() => onNavigate("book-pickup")}
-          >
+          <button type="button" className="btn btn-primary" onClick={() => onNavigate("book-pickup")}>
             Schedule Pickup
           </button>
         </div>
@@ -132,7 +114,7 @@ const DashboardOverview = ({ onNavigate }) => {
         <div className="dash-panel dash-panel--impact">
           <h2>Impact Preview</h2>
           <span className="dash-impact-icon">
-            <FontAwesomeIcon icon={faLeaf} />
+            <img src="/assets/Icon only 2.png" alt="Renexa icon" className="hero-badge-icon" width={50} height={50} />
           </span>
           <p className="dash-impact-value">15</p>
           <p className="dash-impact-label">Trees saved this year</p>
@@ -143,7 +125,7 @@ const DashboardOverview = ({ onNavigate }) => {
               <span>CO2 offset</span>
             </div>
             <div>
-              <FontAwesomeIcon icon={faLeaf} />
+              <img src="/assets/Icon only 2.png" alt="Renexa icon" className="hero-badge-icon" width={50} height={50} />
               <p>1,085 L</p>
               <span>Water saved</span>
             </div>

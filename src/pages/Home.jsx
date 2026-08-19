@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faLeaf,
   faCircleCheck,
   faRecycle,
   faTree,
@@ -24,13 +23,14 @@ const Home = () => {
         <div className="hero-inner">
           <div className="hero-copy">
             <span className="hero-badge">
-              <FontAwesomeIcon icon={faLeaf} /> Eco-friendly Waste Solutions
+              <img src="/assets/Icon only 2.png" alt="Renexa icon" className="hero-badge-icon" width={50} height={50} />
+              Eco-friendly Waste Solutions
             </span>
             <h1>
               Smarter waste management for a <span>greener city.</span>
             </h1>
             <p>
-              Renexa connects modern businesses and communities with efficient,
+              WastePal connects modern businesses and communities with efficient,
               tech-enabled pickup services. Reduce your footprint, track your
               recycling, and help build a sustainable future effortlessly.
             </p>

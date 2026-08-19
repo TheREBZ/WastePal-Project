@@ -1,19 +1,16 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faLeaf,
   faGaugeHigh,
   faTruck,
   faGift,
   faRecycle,
-  faChevronDown,
   faFileLines,
   faHeadset,
   faGear,
   faArrowRightFromBracket,
   faBell,
   faCircleCheck,
-  faEllipsis
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "../router/Router";
 import DashboardOverview from "../components/DashboardOverview";
@@ -43,11 +40,7 @@ const PLACEHOLDER_COPY = {
   recycling: {
     title: "Recycling",
     desc: "Coming soon, this feature will be available in our next phase.",
-  },
-  support: {
-    title: "Support",
-    desc: "Reach our team or browse helpful articles about your account and pickups.",
-  },
+  }
 };
 const SAMPLE_REPORTS = [
   {
@@ -57,7 +50,8 @@ const SAMPLE_REPORTS = [
     wasteDiverted: "22 kg",
     recyclingRate: "43%",
     status: "Pending",
-    details: "From your 1 pickup this month. plastics made up the largest share. No contamination flags on your bins.",
+    details:
+      "From your 1 pickup this month. plastics made up the largest share. No contamination flags on your bins.",
   },
   {
     id: "rpt-2026-07",
@@ -66,7 +60,8 @@ const SAMPLE_REPORTS = [
     wasteDiverted: "42 kg",
     recyclingRate: "78%",
     status: "Complete",
-    details: "From your 3 pickups this month. Paper and cardboard made up the largest share, followed by mixed plastics. No contamination flags on your bins.",
+    details:
+      "From your 3 pickups this month. Paper and cardboard made up the largest share, followed by mixed plastics. No contamination flags on your bins.",
   },
   {
     id: "rpt-2026-06",
@@ -75,7 +70,18 @@ const SAMPLE_REPORTS = [
     wasteDiverted: "37 kg",
     recyclingRate: "74%",
     status: "Complete",
-    details: "From your 3 pickups this month. Glass volume was up compared to May. One pickup was rescheduled due to a public holiday.",
+    details:
+      "From your 3 pickups this month. Glass volume was up compared to May. One pickup was rescheduled due to a public holiday.",
+  },
+  {
+    id: "rpt-2026-05",
+    period: "May 2026",
+    generatedOn: "Jun 1, 2026",
+    wasteDiverted: "31 kg",
+    recyclingRate: "71%",
+    status: "Complete",
+    details:
+      "From your 2 pickups this month. You dropped off e-waste for the first time, adding 4 kg toward your total diverted.",
   },
 ];
 
@@ -99,143 +105,91 @@ const Dashboard = () => {
   };
 
   const renderReports = () => (
-    <div className="reports-container">
-      <div className="report-header-text">
-        <div>
-          <h2>Your Reports</h2>
-          <p>
-            A running record of your monthly recycling activity. Select a
-            report to view the full breakdown.
-          </p>
-        </div>
+    <div className="dash-panel dash-reports-panel">
+      <div className="dash-panel-header">
+        <h2>Your Reports</h2>
       </div>
-      <div className="reports-demo-notice">
-      <span>
-        These reports contain demo information for now. Real user data will be
-        displayed here once available.
-      </span>
-    </div>
-  
-      <div className="report-panel">
-        <div className="report-table-wrapper">
-          <table className="dash-table dash-reports-table">
-            <thead>
-              <tr>
-                <th>Period</th>
-                <th>Generated</th>
-                <th>Waste diverted</th>
-                <th>Recycling rate</th>
-                <th>Status</th>
-                <th></th>
-              </tr>
-            </thead>
-  
-            <tbody>
-              {SAMPLE_REPORTS.map((report) => {
-                const isOpen = expandedReportId === report.id;
-  
-                return (
-                  <>
-                    <tr
-                      key={report.id}
-                      className={`dash-reports-row ${
-                        isOpen ? "dash-reports-row--active" : ""
-                      }`}
-                      onClick={() => toggleReport(report.id)}
+      <p className="dash-reports-intro">
+        A running record of your monthly recycling activity. Select a row for the full breakdown.
+      </p>
+
+      <table className="dash-table dash-reports-table">
+        <thead>
+          <tr>
+            <th>Period</th>
+            <th>Generated</th>
+            <th>Waste diverted</th>
+            <th>Recycling rate</th>
+            <th>Status</th>
+            <th aria-hidden="true"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {SAMPLE_REPORTS.map((report) => {
+            const isOpen = expandedReportId === report.id;
+            return (
+              <Fragment key={report.id}>
+                <tr
+                  className={`dash-reports-row ${isOpen ? "dash-reports-row--active" : ""}`}
+                  onClick={() => toggleReport(report.id)}
+                >
+                  <td className="dash-table-primary">{report.period}</td>
+                  <td>{report.generatedOn}</td>
+                  <td>{report.wasteDiverted}</td>
+                  <td>{report.recyclingRate}</td>
+                  <td>
+                    <span className="dash-status dash-status--confirmed">{report.status}</span>
+                  </td>
+                  <td className="dash-reports-chevron">
+                    <button
+                      type="button"
+                      className="dash-reports-toggle"
+                      aria-expanded={isOpen}
+                      aria-controls={`report-details-${report.id}`}
+                      aria-label={`${isOpen ? "Hide" : "Show"} details for ${report.period}`}
+                      onClick={(event) => {
+                        // Stop this from also bubbling to the row's onClick above,
+                        // which would toggle twice and appear to do nothing.
+                        event.stopPropagation();
+                        toggleReport(report.id);
+                      }}
                     >
-                      <td className="dash-table-primary">
-                        {report.period}
-                      </td>
-  
-                      <td>{report.generatedOn}</td>
-  
-                      <td>{report.wasteDiverted}</td>
-  
-                      <td>{report.recyclingRate}</td>
-  
-                      <td>
-                        <span
-                          className={`dash-status ${
-                            report.status === "Pending"
-                              ? "dash-status--pending"
-                              : "dash-status--confirmed"
-                          }`}
-                        >
-                          {report.status}
-                        </span>
-                      </td>
-  
-                      <td className="dash-reports-chevron">
-                        <button
-                          type="button"
-                          className="dash-reports-toggle"
-                          aria-expanded={isOpen}
-                          aria-controls={`report-details-${report.id}`}
-                          aria-label={`${
-                            isOpen ? "Hide" : "Show"
-                          } details for ${report.period}`}
-                          onClick={(event) => {
-                            event.stopPropagation();
-                            toggleReport(report.id);
-                          }}
-                        >
-                          <FontAwesomeIcon
-                            icon={faChevronDown}
-                            className={
-                              isOpen
-                                ? "dash-reports-chevron--open"
-                                : ""
-                            }
-                          />
-                        </button>
-                      </td>
-                    </tr>
-  
-                    <tr
-                      className="dash-reports-details-row"
-                      id={`report-details-${report.id}`}
-                      hidden={!isOpen}
-                    >
-                      <td colSpan={6}>
-                        <div className="dash-report-details">
-                          {report.details}
-                        </div>
-                      </td>
-                    </tr>
-                  </>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
-      </div>
+                      <FontAwesomeIcon icon={faChevronDown} className={isOpen ? "dash-reports-chevron--open" : ""} />
+                    </button>
+                  </td>
+                </tr>
+                <tr className="dash-reports-details-row" id={`report-details-${report.id}`} hidden={!isOpen}>
+                  <td colSpan={6}>{report.details}</td>
+                </tr>
+              </Fragment>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 
-  const renderSupport = () => (
-    <div className="support-container">
-      <div className="support-card">
-        <div className="support-icon">
-          <FontAwesomeIcon icon={faHeadset} />
-        </div>
-  
-        <div className="support-content">
-          <h2>Need some help?</h2>
-          <p>
-            Have a question about your pickups, account, or recycling activity?
-            Our support agent is here to help.
-          </p>
-  
-          <a
-            href="https://kcemma.dedyn.io/webhook/5785de04-d0c1-449e-9e77-204560674434/chat"
-            className="support-link btn btn-primary"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Speak with support
-          </a>
-        </div>
-      </div>
+const renderSupport = () => (
+    <div className="dash-panel dash-support-panel">
+      <span className="dash-placeholder-icon">
+        <FontAwesomeIcon icon={faRobot} />
+      </span>
+      <h2>Talk to Support</h2>
+      <p>Get help from our AI support assistant, any time your questions come up.</p>
+      <a
+        className="dash-support-btn"
+        href="#"
+        target="_blank"
+        rel="noreferrer"
+        aria-disabled="true"
+        onClick={(event) => {
+          // Remove this guard once the AI support URL is wired up above.
+          event.preventDefault();
+        }}
+      >
+        Open AI Support
+        <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
+      </a>
     </div>
   );
   
@@ -253,7 +207,7 @@ const Dashboard = () => {
           <FontAwesomeIcon icon={faCircleCheck} />
         </span>
         <h2>{copy.title}</h2>
-        <p dangerouslySetInnerHTML={{__html: copy.desc}}></p>
+        <p>{copy.desc}</p>
       </div>
     );
   };
@@ -266,15 +220,15 @@ const Dashboard = () => {
         onClick={() => setSidebarOpen((open) => !open)}
         aria-label="Toggle navigation"
       >
-        <FontAwesomeIcon icon={faEllipsis} />
+        <FontAwesomeIcon icon={faGaugeHigh} />
         <span>Menu</span>
       </button>
 
       <aside className={`dash-sidebar ${sidebarOpen ? "dash-sidebar--open" : ""}`}>
         <div className="dash-logo">
-          <FontAwesomeIcon icon={faLeaf} className="dash-logo-icon" />
+          <img src="/assets/Horizontal-logo-2.png" alt="Renexa Logo" width={100} height={60} />
           <div>
-            <p>Renexa</p>
+            {/* <p>WastePal</p> */}
             <span>Business Plan</span>
           </div>
         </div>
@@ -302,7 +256,7 @@ const Dashboard = () => {
       <div className="dash-main">
         <header className="dash-topbar">
           <div>
-            <h1>{activeView === "settings" ? "Settings" : `Hello, Esther`}</h1>
+            <h1>{activeView === "settings" ? "Settings" : `Hello, Sarah`}</h1>
             <p>
               {activeView === "settings"
                 ? "Manage your personal information, addresses, and account preferences."
@@ -314,7 +268,7 @@ const Dashboard = () => {
               <FontAwesomeIcon icon={faBell} />
             </button>
             <div className="dash-avatar" aria-hidden="true">
-              E
+              S
             </div>
           </div>
         </header>

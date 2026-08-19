@@ -18,6 +18,7 @@
   align-items: center;
   gap: 8px;
   background-color: var(--white);
+  border: 1px solid var(--border-grey);
   color: var(--eco-green);
   font-size: 13px;
   font-weight: var(--fw-bold);

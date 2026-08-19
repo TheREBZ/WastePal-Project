@@ -1,6 +1,4 @@
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLeaf } from "@fortawesome/free-solid-svg-icons";
 import Link from "../router/Link";
 import { useRouter } from "../router/Router";
 import "../styles/Auth.css";
@@ -39,8 +37,7 @@ const Login = () => {
     <main className="auth-page">
       <div className="auth-card">
         <div className="auth-logo">
-          <FontAwesomeIcon icon={faLeaf} className="auth-logo-icon" />
-          <span>WastePal</span>
+          <img src="/assets/Horizontal-logo-2.png" alt="Renexa Logo" width={100} height={60} />
         </div>
         <h1>Welcome Back</h1>
         <p className="auth-subtitle">Log in to manage your eco-impact.</p>
@@ -81,7 +78,6 @@ const Login = () => {
           <button type="submit" className="btn btn-primary btn-block" disabled={submitting}>
             {submitting ? "Logging in..." : "Login"}
           </button>
-          <button type="submit" className="btn btn-primary btn-block">Login with Google</button>
         </form>
 
         <p className="auth-footer">

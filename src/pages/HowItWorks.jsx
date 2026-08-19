@@ -33,8 +33,8 @@ const HowItWorks = () => {
           <span className="step-badge step-badge--2">2</span>
           <h3>Waste Collection</h3>
           <p>
-            Our pickers arrive exactly when scheduled, ensuring clean,
-            efficient pickups right from your door.
+            Our electric trucks arrive exactly when scheduled, ensuring silent,
+            zero-emission pickups right from your door.
           </p>
           <div className="how-illustration how-illustration--truck">
             <FontAwesomeIcon icon={faTruck} />

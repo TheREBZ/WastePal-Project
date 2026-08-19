@@ -1,119 +1,95 @@
-.book-pickup-page {
-  width: 100%;
+.auth-card h1 {
+  font-family: var(--manrope-primary);
+  font-weight: var(--fw-bold);
+  font-size: 24px;
 }
 
-.book-pickup-header {
+.auth-card p {
+  font-weight: var(--fw-regular);
+  font-size: 14px;
+  text-align: center;
+  margin-top: -10px;
   margin-bottom: 20px;
 }
 
-.book-pickup-header h2 {
-  font-family: var(--manrope-primary);
-  font-size: 18px;
-  color: var(--charcoal-grey);
-  margin-bottom: 6px;
+
+/* .book-pickup {
+  background: var(--bg-mint-soft);
+  padding: 20px;
+  border-radius: 8px;
+  
 }
 
-.book-pickup-header p {
-  font-size: 13px;
+
+.book-pickup h1 {
+  font-size: 34px;
+  color: var(--charcoal-grey);
+  margin-bottom: 14px;
+}
+
+.book-pickup p {
+  font-size: 16px;
   color: var(--text-muted);
-  line-height: 1.5;
+  margin-bottom: 20px;
 }
 
-.book-pickup-card {
-  width: 100%;
-  max-width: 760px;
-  background-color: var(--white);
-  border: 1px solid var(--border-grey);
-  border-radius: var(--radius-md);
-  padding: 28px;
-}
-
-.book-pickup-form {
+.book-pickup form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 12px;
+  max-width: 420px;
+  align-items: center;
 }
 
-.book-form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.book-form-group label {
-  font-size: 12.5px;
-  font-weight: var(--fw-bold);
-  color: var(--charcoal-grey);
-}
-
-.book-form-group input,
-.book-form-group select,
-.book-form-group textarea {
-  width: 100%;
-  border: 1px solid var(--border-grey);
-  border-radius: var(--radius-sm);
-  background-color: var(--white);
-  color: var(--charcoal-grey);
-  font-family: var(--manrope-primary);
-  font-size: 13px;
-  transition: var(--transition);
-  box-sizing: border-box;
-}
-
-.book-form-group input,
-.book-form-group select {
-  height: 44px;
-  padding: 0 12px;
-}
-
-.book-form-group textarea {
-  min-height: 100px;
-  padding: 12px;
-  resize: vertical;
-}
-
-.book-form-group input:focus,
-.book-form-group select:focus,
-.book-form-group textarea:focus {
-  outline: none;
-  border-color: var(--eco-green);
-}
-
-.book-form-group input::placeholder,
-.book-form-group textarea::placeholder {
+.book-pickup label {
+  font-weight: bold;
   color: var(--text-muted);
 }
 
-.book-form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
+.book-pickup input,
+.book-pickup select {
+  padding: 8px;
+  border: 1px solid var(--border-grey);
+  border-radius: 4px;
 }
 
-.book-pickup-actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 4px;
+.book-pickup .btn {
+  background: var(--eco-green);
+  border: 1px solid var(--black);
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-.book-pickup-actions .btn {
-  min-width: 170px;
+.book-pickup .btn:hover {
+  background: var(--trust-blue);
+  color: #fff;
 }
 
-@media screen and (max-width: 600px) {
-  .book-pickup-card {
-    padding: 20px;
+
+/* Mobile responsiveness */
+/* @media (max-width: 365px) {
+  .book-pickup {
+    padding: 15px;
   }
 
-  .book-form-grid {
-    grid-template-columns: 1fr;
+  .book-pickup h1 {
+    font-size: 1.2rem;
+    text-align: center;
   }
 
-  .book-pickup-actions {
-    justify-content: stretch;
+  .book-pickup form {
+    gap: 10px;
   }
 
-  .book-pickup-actions .btn {
+  .book-pickup input,
+  .book-pickup select {
     width: 100%;
+    font-size: 0.9rem;
   }
-}
+
+  .book-pickup .btn {
+    width: 100%;
+    font-size: 1rem;
+  }
+} */

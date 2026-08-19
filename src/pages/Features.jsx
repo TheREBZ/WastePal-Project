@@ -93,7 +93,7 @@ const Features = () => {
         <div className="features-cta-inner section-inner">
           <h2>Ready to transform your waste management?</h2>
           <Link to="/signup" className="btn btn-primary">
-            Sign up
+            Start Free Trial
           </Link>
         </div>
       </section>

@@ -4,8 +4,8 @@ import "../styles/BookPickup.css";
 
 const initialForm = {
   wasteType: "Plastic",
-  address: "",
-  quantity: "1",
+  address: "12 Oba street, Lagos Island",
+  quantity: 2,
   date: "",
   time: "",
 };
@@ -16,7 +16,6 @@ const BookPickup = () => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setFormData((current) => ({
       ...current,
       [name]: value,
@@ -25,116 +24,39 @@ const BookPickup = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    sessionStorage.setItem(
-      "wastepal-booking",
-      JSON.stringify(formData)
-    );
-
-    navigate("/review-booking");
+    sessionStorage.setItem("wastepal-booking", JSON.stringify(formData));
+    navigate("/reviewbooking");
   };
 
   return (
-    <div className="book-pickup-page">
-      <div className="book-pickup-header">
-        <h2>Book Waste Collection</h2>
-        <p>
-          Fill in the details below to schedule a waste pickup.
-        </p>
-      </div>
+    <div className="auth-page">
+      <div className="auth-card">
+        <h1>Book Waste Collection</h1>
+        <p>Fill in the details to schedule a pickup</p>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="wasteType">Select Waste Type</label>
+          <select id="wasteType" name="wasteType" value={formData.wasteType} onChange={handleChange}>
+            <option>Plastic</option>
+            <option>Paper</option>
+            <option>E-waste</option>
+            <option>Metal</option>
+            <option>Glass</option>
+            <option>Others</option>
+          </select>
 
-      <div className="book-pickup-card">
-        <form
-          className="book-pickup-form"
-          onSubmit={handleSubmit}
-        >
-          <div className="book-form-group">
-            <label htmlFor="wasteType">
-              Select Waste Type
-            </label>
+          <label htmlFor="address">Pickup Address</label>
+          <input id="address" name="address" type="text" value={formData.address} onChange={handleChange} />
 
-            <select
-              id="wasteType"
-              name="wasteType"
-              value={formData.wasteType}
-              onChange={handleChange}
-            >
-              <option>Plastic</option>
-              <option>Paper</option>
-              <option>E-waste</option>
-              <option>Metal</option>
-              <option>Glass</option>
-              <option>Others</option>
-            </select>
-          </div>
+          <label htmlFor="quantity">Quantity</label>
+          <input id="quantity" name="quantity" type="number" min="1" value={formData.quantity} onChange={handleChange} />
 
-          <div className="book-form-group">
-            <label htmlFor="address">
-              Pickup Address
-            </label>
+          <label htmlFor="date">Date</label>
+          <input id="date" name="date" type="date" value={formData.date} onChange={handleChange} />
 
-            <textarea
-              id="address"
-              name="address"
-              value={formData.address}
-              onChange={handleChange}
-              placeholder="Enter your pickup address"
-            />
-          </div>
+          <label htmlFor="time">Time</label>
+          <input id="time" name="time" type="time" value={formData.time} onChange={handleChange} />
 
-          <div className="book-form-grid">
-            <div className="book-form-group">
-              <label htmlFor="quantity">
-                Quantity
-              </label>
-
-              <input
-                id="quantity"
-                name="quantity"
-                type="number"
-                min="1"
-                value={formData.quantity}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="book-form-group">
-              <label htmlFor="date">
-                Date
-              </label>
-
-              <input
-                id="date"
-                name="date"
-                type="date"
-                value={formData.date}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div className="book-form-group">
-              <label htmlFor="time">
-                Time
-              </label>
-
-              <input
-                id="time"
-                name="time"
-                type="time"
-                value={formData.time}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-
-          <div className="book-pickup-actions">
-            <button
-              type="submit"
-              className="btn btn-primary"
-            >
-              Continue to Review
-            </button>
-          </div>
+          <button type="submit" className="btn btn-block btn-primary">Book Waste Pickup</button>
         </form>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLeaf, faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 import Link from "../router/Link";
 import { useRouter } from "../router/Router";
 import "../styles/Navbar.css";
@@ -9,7 +9,7 @@ const NAV_LINKS = [
   { label: "How it Works", to: "/how-it-works" },
   { label: "Features", to: "/features" },
   { label: "Pricing", to: "/pricing" },
-  // { label: "Login", to: "/login" },
+  { label: "Login", to: "/login" },
 ];
 
 const Navbar = () => {
@@ -21,9 +21,8 @@ const Navbar = () => {
   return (
     <header className="navbar">
       <div className="navbar-inner">
-        <Link to="/" className="navbar-logo" onClick={closeMenu}>
-          <FontAwesomeIcon icon={faLeaf} className="navbar-logo-icon" />
-          <span>ReNexa</span>
+        <Link href="/" className="navbar-logo" onClick={closeMenu}>
+          <img src="/assets/Horizontal-logo-2.png" alt="Renexa Logo" width={100} height={60} />
         </Link>
 
         <nav className={`navbar-links ${menuOpen ? "navbar-links--open" : ""}`}>

@@ -78,8 +78,8 @@ const Contact = () => {
       <section className="contact-hero section-inner">
         <h1>Get in Touch</h1>
         <p>
-          Have questions about our services and operations? We're
-          here to help you.
+          Have questions about our eco-friendly waste management solutions? We're
+          here to help you make a positive impact.
         </p>
       </section>
 
@@ -160,7 +160,7 @@ const Contact = () => {
             </span>
             <div>
               <p className="contact-info-title">Headquarters</p>
-              <p className="contact-info-text">123 Eco way, Lagos<br />Nigeria</p>
+              <p className="contact-info-text">123 Eco Way, Suite 400<br />Portland, OR 97204<br />United States</p>
             </div>
           </div>
           <div className="contact-info-item">
@@ -169,7 +169,7 @@ const Contact = () => {
             </span>
             <div>
               <p className="contact-info-title">Email Us</p>
-              <p className="contact-info-text">hello@renexa.com</p>
+              <p className="contact-info-text">hello@wastepal.com</p>
             </div>
           </div>
           <div className="contact-info-item">
@@ -178,7 +178,7 @@ const Contact = () => {
             </span>
             <div>
               <p className="contact-info-title">Call Us</p>
-              <p className="contact-info-text">+ (234) 80-4315-0199<br />Mon–Fri, 8am – 5pm GMT</p>
+              <p className="contact-info-text">+1 (800) 555-0199<br />Mon–Fri, 8am – 5pm PST</p>
             </div>
           </div>
           <div className="contact-map" aria-hidden="true">
