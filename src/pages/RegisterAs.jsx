@@ -5,20 +5,50 @@ import {
   faBuilding,
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "../router/Router";
+import { getRegistrationData, saveRegistrationData } from "../services/registrationStorage";
+import { setAccountType } from "../services/authService";
+import { getAccessToken } from "../services/authStorage";
+import { useState } from "react";
 import "../styles/Auth.css";
 
 const RegisterAs = () => {
   const { navigate } = useRouter();
+  const [error, setError] = useState("");
+  const [submittingRole, setSubmittingRole] = useState(null);
 
-  const handleSelect = (role) => {
-    if (role === "household") {
+  const handleSelect = async (role) => {
+    const registrationData = getRegistrationData();
+    const accessToken = getAccessToken();
+
+    if (!registrationData || !accessToken) {
+      // No in-progress signup / no session — start over.
+      navigate("/signup");
+      return;
+    }
+
+    setError("");
+    setSubmittingRole(role);
+
+    try {
+      await setAccountType(role, accessToken);
+
+      saveRegistrationData({
+        ...registrationData,
+        role,
+      });
+
+      if (role === "household") {
         navigate("/household-profile");
       }
-    if (role === "business_owner") {
-    navigate("/business-profile");
+
+      if (role === "business_owner") {
+        navigate("/business-profile");
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSubmittingRole(null);
     }
-    // We'll pass the selected role into the next step
-    // when we connect the API.
   };
 
   return (
@@ -45,6 +75,7 @@ const RegisterAs = () => {
             type="button"
             className="register-option"
             onClick={() => handleSelect("household")}
+            disabled={submittingRole !== null}
           >
             <div className="register-option-icon">
               <FontAwesomeIcon icon={faHouse} />
@@ -54,8 +85,9 @@ const RegisterAs = () => {
               <strong>Household</strong>
 
               <span>
-                For individuals and households looking to
-                manage their waste responsibly.
+                {submittingRole === "household"
+                  ? "Saving..."
+                  : "For individuals and households looking to manage their waste responsibly."}
               </span>
             </div>
           </button>
@@ -64,6 +96,7 @@ const RegisterAs = () => {
             type="button"
             className="register-option"
             onClick={() => handleSelect("business_owner")}
+            disabled={submittingRole !== null}
           >
             <div className="register-option-icon">
               <FontAwesomeIcon icon={faBuilding} />
@@ -73,13 +106,16 @@ const RegisterAs = () => {
               <strong>Business</strong>
 
               <span>
-                For businesses looking to manage their
-                waste and recycling needs.
+                {submittingRole === "business_owner"
+                  ? "Saving..."
+                  : "For businesses looking to manage their waste and recycling needs."}
               </span>
             </div>
           </button>
 
         </div>
+
+        {error && <em className="field-error">{error}</em>}
 
         <p className="auth-footer">
           Already have an account?{" "}

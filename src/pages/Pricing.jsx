@@ -6,60 +6,31 @@ import "../styles/Pricing.css";
 
 const PLANS = [
   {
-    name: "Basic",
-    price: "₦5,000",
+    name: "Monthly Subscription",
+    price: "₦3,182",
     period: "/month",
-    desc: "Perfect for individuals starting their eco-journey.",
+    desc: "Perfect for Household and Businesses that are looking for a reliable monthly pickup system.",
     features: [
-      "Basic recycling guidelines",
-      "1 Scheduled pickup per month",
-      "Community forum access",
+      "1 Time Monthly Payment",
+      "4 Scheduled pickups per month",
     ],
     cta: "Get Started",
     to: "/signup",
   },
   {
-    name: "Household",
-    price: "₦12,000",
-    period: "/month",
-    desc: "Ideal for families managing daily waste.",
+    name: "Custom",
+    price: "₦750",
+    period: "/pickup",
+    desc: "Custom pickup solutions for household and businesses.",
     features: [
-      "Advanced sorting guide",
-      "Weekly scheduled pickups",
-      "Sorting guide provided",
-      "Priority email support",
+      "Request pickup at anytime",
+      "Pay as you go",
+      "Reliable and Efficient pickups",
+      "Cheap and easy",
     ],
-    cta: "Start Free Trial",
+    cta: "Get started",
     to: "/signup",
     recommended: true,
-  },
-  {
-    name: "Business",
-    price: "₦30,000",
-    period: "/month",
-    desc: "Tailored for small offices and retail spaces.",
-    features: [
-      "Multiple waste dispose option",
-      "Bi-weekly bulk pickups",
-      "Monthly sustainability reports",
-      "Dedicated account manager",
-    ],
-    cta: "Contact Sales",
-    to: "/contact",
-  },
-  {
-    name: "Enterprise",
-    price: "Custom",
-    period: "",
-    desc: "Custom solutions for large organizations.",
-    features: [
-      "Multi-location management",
-      "Daily custom pickups",
-      "Real-time tracking API",
-      "24/7 priority support",
-    ],
-    cta: "Contact Sales",
-    to: "/contact",
   },
 ];
 
@@ -98,7 +69,7 @@ const Pricing = () => {
             </ul>
             <Link
               to={plan.to}
-              className={`btn btn-block ${plan.recommended ? "btn-primary" : "btn-outline"}`}
+              className={`btn price-btn btn-block ${plan.recommended ? "btn-primary" : "btn-outline"}`}
             >
               {plan.cta}
             </Link>

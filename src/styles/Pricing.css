@@ -18,10 +18,11 @@
 
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   align-items: start;
   padding-bottom: 72px;
+  align-items: center;
 }
 
 .pricing-card {

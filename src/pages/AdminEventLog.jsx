@@ -109,6 +109,9 @@ const AdminEventLog = () => {
             <p className="admin-log-eyebrow">
               ADMINISTRATION
             </p>
+            <p className="dash-notice">
+              Only admins can see this page
+            </p>
 
             <h1>Event Logs</h1>
 

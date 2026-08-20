@@ -275,7 +275,7 @@ const Dashboard = () => {
           <FontAwesomeIcon icon={faLeaf} className="dash-logo-icon" />
           <div>
             <p>Renexa</p>
-            <span>Business Plan</span>
+            <span>Version 0.01</span>
           </div>
         </div>
 
@@ -302,11 +302,22 @@ const Dashboard = () => {
       <div className="dash-main">
         <header className="dash-topbar">
           <div>
-            <h1>{activeView === "settings" ? "Settings" : `Hello, Esther`}</h1>
+            <h1>{activeView === "settings" ? "Settings" 
+              : activeView === "book-pickup" ? "Book-pickup" 
+              : activeView === "recycling" ? "Recycling" 
+              : activeView === "reports" ? "Reports" 
+              : activeView === "support" ? "Support" 
+              : activeView === "rewards" ? "Rewards" 
+              : `Hello, Esther`}</h1>
             <p>
               {activeView === "settings"
                 ? "Manage your personal information, addresses, and account preferences."
-                : "Here's your eco-impact and upcoming schedule."}
+                : activeView === "book-pickup" ? "Create an order for your waste to be picked"
+                : activeView === "recycling" ? "Here's how we turn your waste into reuseable and sustainable products"
+                : activeView === "rewards" ? "Here's an overview of your points and rewards accumulated"
+                : activeView === "reports" ? "Here's your waste booking history reports"
+                : activeView === "support" ? "Reach out to our support agents for assistance"
+                : "Welcome to your profile dashboard"}
             </p>
           </div>
           <div className="dash-topbar-actions">

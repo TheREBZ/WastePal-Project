@@ -5,14 +5,17 @@ import "../styles/BookPickup.css";
 const initialForm = {
   wasteType: "Plastic",
   address: "",
-  quantity: "1",
+  bag: "1",
+  bagSize: "Big",
   date: "",
   time: "",
 };
 
 const BookPickup = () => {
   const { navigate } = useRouter();
+
   const [formData, setFormData] = useState(initialForm);
+  const [error, setError] = useState("");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -21,14 +24,34 @@ const BookPickup = () => {
       ...current,
       [name]: value,
     }));
+
+    setError("");
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    if (!formData.address.trim()) {
+      setError("Please enter your pickup address.");
+      return;
+    }
+
+    if (!formData.date) {
+      setError("Please select a pickup date.");
+      return;
+    }
+
+    if (!formData.time) {
+      setError("Please select a pickup time.");
+      return;
+    }
+
     sessionStorage.setItem(
       "wastepal-booking",
-      JSON.stringify(formData)
+      JSON.stringify({
+        ...formData,
+        address: formData.address.trim(),
+      })
     );
 
     navigate("/review-booking");
@@ -84,18 +107,35 @@ const BookPickup = () => {
 
           <div className="book-form-grid">
             <div className="book-form-group">
-              <label htmlFor="quantity">
-                Quantity
+              <label htmlFor="bag">
+                Number of Bags
               </label>
 
               <input
-                id="quantity"
-                name="quantity"
+                id="bag"
+                name="bag"
                 type="number"
                 min="1"
-                value={formData.quantity}
+                value={formData.bag}
                 onChange={handleChange}
               />
+            </div>
+
+            <div className="book-form-group">
+              <label htmlFor="bagSize">
+                Select Bag Size
+              </label>
+
+              <select
+                id="bagSize"
+                name="bagSize"
+                value={formData.bagSize}
+                onChange={handleChange}
+              >
+                <option>Big</option>
+                <option>Medium</option>
+                <option>Small</option>
+              </select>
             </div>
 
             <div className="book-form-group">
@@ -126,6 +166,12 @@ const BookPickup = () => {
               />
             </div>
           </div>
+
+          {error && (
+            <p className="field-error">
+              {error}
+            </p>
+          )}
 
           <div className="book-pickup-actions">
             <button

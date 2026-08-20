@@ -10,6 +10,8 @@ import {
 import Link from "../router/Link";
 import { useRouter } from "../router/Router";
 import "../styles/Auth.css";
+import { saveRegistrationData } from "../services/registrationStorage";
+import { registerUser } from "../services/authService";
 
 const Signup = () => {
   const { navigate } = useRouter();
@@ -102,29 +104,48 @@ const Signup = () => {
     return Object.keys(next).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validate()) return;
 
     setSubmitting(true);
+    setErrors((prev) => ({ ...prev, form: "" }));
 
-    // API integration will be added here.
-    // The request will eventually send:
-    //
-    // {
-    //   firstName,
-    //   lastName,
-    //   email,
-    //   phoneNumber,
-    //   password,
-    //   role: "household"
-    // }
+    const payload = {
+      firstName: form.firstName.trim(),
+      lastName: form.lastName.trim(),
+      email: form.email.trim().toLowerCase(),
+      phoneNumber: form.phoneNumber.replace(/\s/g, ""),
+      password: form.password,
+      confirmPassword: form.confirmPassword,
+    };
 
-    setTimeout(() => {
+    try {
+      await registerUser(payload);
+
+      // Email + password are kept only long enough to silently log the
+      // user in right after OTP verification (VerifyEmail.jsx), since
+      // /auth/register and /auth/verify-email don't return tokens.
+      // VerifyEmail.jsx clears the password out of storage once that
+      // login call succeeds.
+      saveRegistrationData({
+        firstName: payload.firstName,
+        lastName: payload.lastName,
+        email: payload.email,
+        phoneNumber: payload.phoneNumber,
+        password: form.password,
+      });
+
+      navigate("/verify-email");
+    } catch (error) {
+      setErrors((prev) => ({
+        ...prev,
+        form: error.message,
+      }));
+    } finally {
       setSubmitting(false);
-      navigate("/register");
-    }, 700);
+    }
   };
 
   const handleGoogleSignup = () => {
@@ -305,12 +326,18 @@ const Signup = () => {
             </em>
           )}
 
+          {errors.form && (
+            <em className="field-error">
+              {errors.form}
+            </em>
+          )}
+
           <button
             type="submit"
             className="btn btn-primary btn-block"
             disabled={submitting}
           >
-            {submitting ? "Registering..." : "Sign up"}
+            {submitting ? "Creating account..." : "Sign up"}
           </button>
 
           <button

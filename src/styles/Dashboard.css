@@ -376,6 +376,78 @@
   color: #a67c00;
 }
 
+/* Next pickup */
+
+.dash-next-pickup-time {
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 14px;
+}
+
+/* Recycling brief */
+
+.dash-panel--recycling-brief {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dash-recycling-brief-icon {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--bg-mint);
+  color: var(--eco-green);
+  font-size: 17px;
+  margin-bottom: 14px;
+}
+
+.dash-recycling-brief-label {
+  font-size: 10.5px;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.08em;
+  color: var(--eco-green);
+  margin-bottom: 7px;
+}
+
+.dash-panel--recycling-brief h2 {
+  font-size: 17px;
+  line-height: 1.35;
+  margin-bottom: 10px;
+}
+
+.dash-recycling-brief-text {
+  font-size: 12.5px;
+  line-height: 1.65;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+}
+
+.dash-recycling-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-grey);
+  color: var(--text-muted);
+  font-size: 11.5px;
+  line-height: 1.5;
+}
+
+.dash-recycling-tip svg {
+  color: var(--eco-green);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.dash-recycling-tip strong {
+  color: var(--charcoal-grey);
+}
+
 .dash-panel--impact {
   text-align: center;
 }
@@ -853,38 +925,103 @@
   }
 
   .dash-table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-    justify-content: space-between;
-  }
-
-  .dash-table-primary{
-    display: flex;
-    justify-content: space-between;
-    margin-inline: 5px;
-  }
-
-  .dash-table-secondary{
-    margin-inline: 5px;
-  }
-
-  .dash-table-type{
-    width: 70%;
-    padding-inline: 8px 0;
-  }
-
-  .dash-table-location{
-    width: 50%;
-    padding-inline: 0 6px;
-  }
-
-  .location{
-    padding-left: 6px;
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+    white-space: normal;
   }
   
-  .waste-type{
-    padding-right:4px;
+  .dash-table th,
+  .dash-table td {
+    word-break: break-word;
+  }
+  
+  .dash-table th {
+    font-size: 10px;
+  }
+  
+  .dash-table td {
+    font-size: 12px;
+    padding: 10px 6px;
+  }
+  
+  .dash-table .date-time {
+    width: 24%;
+  }
+  
+  .dash-table .waste-type {
+    width: 20%;
+  }
+  
+  .dash-table .location {
+    width: 36%;
+  }
+  
+  .dash-table .status {
+    width: 20%;
+  }
+  
+  .dash-table-primary {
+    display: block;
+    margin-inline: 0;
+  }
+  
+  .dash-table-secondary {
+    margin-inline: 0;
+  }
+  
+  .dash-table-type,
+  .dash-table-location {
+    width: auto;
+    padding-inline: 0;
+  }
+  
+  .dash-status {
+    font-size: 10px;
+    padding: 3px 7px;
   }
 }
 
+@media screen and (max-width: 480px) {
+  .dash-main {
+    padding: 16px 12px 32px;
+  }
+
+  .dash-panel {
+    padding: 14px;
+  }
+
+  .dash-table th {
+    font-size: 9px;
+  }
+
+  .dash-table td {
+    font-size: 11px;
+    padding: 9px 4px;
+  }
+
+  .dash-table .date-time {
+    width: 25%;
+  }
+
+  .dash-table .waste-type {
+    width: 20%;
+  }
+
+  .dash-table .location {
+    width: 35%;
+  }
+
+  .dash-table .status {
+    width: 20%;
+  }
+
+  .dash-status {
+    font-size: 9px;
+    padding: 3px 5px;
+  }
+
+  .dash-empty-bookings {
+    white-space: normal;
+  }
+}

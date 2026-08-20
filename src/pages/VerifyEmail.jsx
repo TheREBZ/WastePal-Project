@@ -4,6 +4,12 @@ import { faLeaf, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import Link from "../router/Link";
 import { useRouter } from "../router/Router";
 import "../styles/VerifyEmail.css";
+import { verifyEmail, resendOtp } from "../services/authService";
+import { saveAuthSession } from "../services/authStorage";
+import {
+  getRegistrationData,
+  saveRegistrationData,
+} from "../services/registrationStorage";
 
 const VerifyEmail = () => {
   const { navigate } = useRouter();
@@ -20,22 +26,64 @@ const VerifyEmail = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (otp.length !== 6) {
       setError("Please enter the 6-digit verification code.");
       return;
     }
-
+  
     setSubmitting(true);
-
-    // API integration will be added here.
-    // POST:
-    // https://renexa.onrender.com/api/auth/verify-email
-
-    setTimeout(() => {
+    setError("");
+  
+    const registrationData = getRegistrationData();
+  
+    if (!registrationData?.email) {
       setSubmitting(false);
-      navigate("/login");
-    }, 700);
+      navigate("/signup");
+      return;
+    }
+  
+    try {
+      // Verify the OTP.
+      // The backend also returns access + refresh tokens here.
+      const response = await verifyEmail(otp);
+  
+      const { accessToken, refreshToken, user } = response.data;
+  
+      // Save the authenticated session returned by verification.
+      saveAuthSession({
+        accessToken,
+        refreshToken,
+        user,
+      });
+  
+      // Keep the registration details needed for the next
+      // onboarding steps, but remove the password immediately.
+      saveRegistrationData({
+        ...registrationData,
+        password: undefined,
+      });
+  
+      navigate("/register");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleResend = async () => {
+    const registrationData = getRegistrationData();
+
+    if (!registrationData?.email) return;
+
+    setError("");
+
+    try {
+      await resendOtp(registrationData.email);
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -97,9 +145,7 @@ const VerifyEmail = () => {
         <button
           type="button"
           className="verify-resend"
-          onClick={() => {
-            // Resend OTP endpoint can be added when the backend supports it.
-          }}
+          onClick={handleResend}
         >
           Resend code
         </button>

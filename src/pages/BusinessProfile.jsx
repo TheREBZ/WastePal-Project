@@ -9,6 +9,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "../router/Router";
 import "../styles/Auth.css";
+import {
+  getRegistrationData,
+  clearRegistrationData,
+} from "../services/registrationStorage";
+import { completeProfile } from "../services/authService";
+import { getAccessToken } from "../services/authStorage";
 
 const BusinessProfile = () => {
   const { navigate } = useRouter();
@@ -64,19 +70,46 @@ const BusinessProfile = () => {
     return Object.keys(next).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validate()) return;
 
+    const registrationData = getRegistrationData();
+    const accessToken = getAccessToken();
+
+    if (!registrationData || !accessToken) {
+      navigate("/signup");
+      return;
+    }
+
     setSubmitting(true);
+    setErrors((prev) => ({ ...prev, form: "" }));
 
-    // API integration will be added later.
+    try {
+      // Backend's completeProfileSchema (business branch) expects
+      // exactly: role, businessName, businessType, businesscity,
+      // businessLga, businessAddress — note "businesscity" is lowercase
+      // "c" on the backend, matching that exactly here.
+      await completeProfile(
+        {
+          role: "business_owner",
+          businessName: form.businessName.trim(),
+          businessType: form.businessType.trim(),
+          businesscity: form.city.trim(),
+          businessLga: form.lga.trim(),
+          businessAddress: form.addressText.trim(),
+        },
+        accessToken
+      );
 
-    setTimeout(() => {
+      clearRegistrationData();
+      navigate("/dashboard");
+    } catch (err) {
+      setErrors((prev) => ({ ...prev, form: err.message }));
+    } finally {
       setSubmitting(false);
-      navigate("/verify-email");
-    }, 700);
+    }
   };
 
   return (
@@ -91,7 +124,7 @@ const BusinessProfile = () => {
           <span>ReNexa</span>
         </div>
 
-        <h1>Business profile</h1>
+        <h1>Business Profile</h1>
 
         <p className="auth-subtitle">
           Tell us a little about your business.
@@ -203,6 +236,12 @@ const BusinessProfile = () => {
               </em>
             )}
           </label>
+
+          {errors.form && (
+            <em className="field-error">
+              {errors.form}
+            </em>
+          )}
 
           <button
             type="submit"

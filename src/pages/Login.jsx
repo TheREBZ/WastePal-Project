@@ -4,6 +4,8 @@ import { faLeaf } from "@fortawesome/free-solid-svg-icons";
 import Link from "../router/Link";
 import { useRouter } from "../router/Router";
 import "../styles/Auth.css";
+import { loginUser } from "../services/authService";
+import { saveAuthSession } from "../services/authStorage";
 
 const Login = () => {
   const { navigate } = useRouter();
@@ -25,22 +27,44 @@ const Login = () => {
     return Object.keys(next).length === 0;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!validate()) return;
-    setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      navigate("/dashboard");
-    }, 700);
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (!validate()) return;
+
+  setSubmitting(true);
+  setErrors({});
+
+  try {
+    const response = await loginUser(
+      form.email.trim().toLowerCase(),
+      form.password
+    );
+
+    const { accessToken, refreshToken, user } = response.data;
+
+    saveAuthSession({
+      accessToken,
+      refreshToken,
+      user,
+    });
+
+    navigate("/dashboard");
+  } catch (error) {
+    setErrors({
+      form: error.message,
+    });
+  } finally {
+    setSubmitting(false);
+  }
+};
 
   return (
     <main className="auth-page">
       <div className="auth-card">
         <div className="auth-logo">
           <FontAwesomeIcon icon={faLeaf} className="auth-logo-icon" />
-          <span>WastePal</span>
+          <span>ReNexa</span>
         </div>
         <h1>Welcome Back</h1>
         <p className="auth-subtitle">Log in to manage your eco-impact.</p>
@@ -77,11 +101,21 @@ const Login = () => {
               Forgot password?
             </Link>
           </div>
-
+          {errors.form && (
+            <em className="field-error">{errors.form}</em>
+)}
           <button type="submit" className="btn btn-primary btn-block" disabled={submitting}>
             {submitting ? "Logging in..." : "Login"}
           </button>
-          <button type="submit" className="btn btn-primary btn-block">Login with Google</button>
+          <button
+            type="button"
+            className="btn btn-primary btn-block"
+            onClick={() => {
+              console.log("Google login coming soon");
+            }}
+          >
+            Login with Google
+          </button>
         </form>
 
         <p className="auth-footer">

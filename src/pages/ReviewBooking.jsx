@@ -8,12 +8,14 @@ import {
   faBagShopping,
   faArrowLeft,
   faCircleCheck,
+  faRuler,
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "../router/Router";
 import "../styles/ReviewBookings.css";
 
 const ReviewBooking = () => {
   const { navigate } = useRouter();
+
   const [booking, setBooking] = useState(null);
   const [isConfirmed, setIsConfirmed] = useState(false);
 
@@ -21,30 +23,37 @@ const ReviewBooking = () => {
     const savedBooking = sessionStorage.getItem("wastepal-booking");
 
     if (savedBooking) {
-      setBooking(JSON.parse(savedBooking));
+      try {
+        setBooking(JSON.parse(savedBooking));
+      } catch {
+        sessionStorage.removeItem("wastepal-booking");
+      }
     }
   }, []);
 
   const handleConfirm = () => {
     if (!booking) return;
-  
+
     const existingBookings = JSON.parse(
       localStorage.getItem("wastepal-bookings") || "[]"
     );
-  
+
     const newBooking = {
       id: `booking-${Date.now()}`,
       ...booking,
       status: "Confirmed",
     };
-  
+
     localStorage.setItem(
       "wastepal-bookings",
-      JSON.stringify([...existingBookings, newBooking])
+      JSON.stringify([
+        ...existingBookings,
+        newBooking,
+      ])
     );
-  
+
     setIsConfirmed(true);
-  
+
     setTimeout(() => {
       sessionStorage.removeItem("wastepal-booking");
       navigate("/dashboard");
@@ -56,17 +65,18 @@ const ReviewBooking = () => {
       <main className="review-booking-page">
         <div className="review-booking-empty">
           <h1>No booking found</h1>
+
           <p>
-            We couldn't find any pickup details to review. Please schedule a
-            pickup first.
+            We couldn't find any pickup details to review.
+            Please schedule a pickup first.
           </p>
 
           <button
             type="button"
             className="btn btn-primary"
-            onClick={() => navigate("/bookpickup")}
+            onClick={() => navigate("/dashboard")}
           >
-            Go to Book Pickup
+            Go to Dashboard
           </button>
         </div>
       </main>
@@ -76,10 +86,11 @@ const ReviewBooking = () => {
   return (
     <main className="review-booking-page">
       <div className="review-booking-wrapper">
+
         <button
           type="button"
           className="review-back-button"
-          onClick={() => navigate("/bookpickup")}
+          onClick={() => navigate("/dashboard")}
         >
           <FontAwesomeIcon icon={faArrowLeft} />
           Back to booking
@@ -87,69 +98,101 @@ const ReviewBooking = () => {
 
         <div className="review-booking-header">
           <h1>Review your pickup</h1>
+
           <p>
-            Please check your collection details before confirming your
-            booking.
+            Please check your collection details before
+            confirming your booking.
           </p>
         </div>
 
         <section className="review-booking-card">
           <div className="review-booking-grid">
+
             <div className="review-detail">
-              <span className="review-detail-label">Waste Type</span>
+              <span className="review-detail-label">
+                Waste Type
+              </span>
 
               <div className="review-detail-value">
                 <span className="review-detail-icon">
                   <FontAwesomeIcon icon={faRecycle} />
                 </span>
-                {booking.wasteType}
+
+                {booking.wasteType || "Not specified"}
               </div>
             </div>
 
             <div className="review-detail">
-              <span className="review-detail-label">Quantity</span>
+              <span className="review-detail-label">
+                Number of Bags
+              </span>
 
               <div className="review-detail-value">
                 <span className="review-detail-icon">
                   <FontAwesomeIcon icon={faBagShopping} />
                 </span>
-                {booking.quantity}{" "}
-                {Number(booking.quantity) > 1 ? "Bags" : "Bag"}
+
+                {booking.bag || "1"}{" "}
+                {Number(booking.bag) > 1 ? "Bags" : "Bag"}
+              </div>
+            </div>
+
+            <div className="review-detail">
+              <span className="review-detail-label">
+                Bag Size
+              </span>
+
+              <div className="review-detail-value">
+                <span className="review-detail-icon">
+                  <FontAwesomeIcon icon={faRuler} />
+                </span>
+
+                {booking.bagSize || "Not specified"}
               </div>
             </div>
 
             <div className="review-detail review-detail--full">
-              <span className="review-detail-label">Pickup Address</span>
+              <span className="review-detail-label">
+                Pickup Address
+              </span>
 
               <div className="review-detail-value">
                 <span className="review-detail-icon">
                   <FontAwesomeIcon icon={faLocationDot} />
                 </span>
+
                 {booking.address || "No address provided"}
               </div>
             </div>
 
             <div className="review-detail">
-              <span className="review-detail-label">Date</span>
+              <span className="review-detail-label">
+                Date
+              </span>
 
               <div className="review-detail-value">
                 <span className="review-detail-icon">
                   <FontAwesomeIcon icon={faCalendarDays} />
                 </span>
+
                 {booking.date || "Not set"}
               </div>
             </div>
 
             <div className="review-detail">
-              <span className="review-detail-label">Time</span>
+              <span className="review-detail-label">
+                Time
+              </span>
 
               <div className="review-detail-value">
                 <span className="review-detail-icon">
                   <FontAwesomeIcon icon={faClock} />
                 </span>
+
                 {booking.time || "Not set"}
               </div>
             </div>
+
           </div>
 
           <div className="review-booking-actions">
