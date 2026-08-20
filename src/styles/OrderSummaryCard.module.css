@@ -1,0 +1,101 @@
+.card {
+  background: var(--renexa-surface);
+  border: 1px solid var(--renexa-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 24px;
+  position: sticky;
+  top: 24px;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--renexa-ink);
+  margin: 0 0 20px;
+}
+
+.plan {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 20px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--renexa-border);
+}
+
+.planIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-md);
+  background: var(--renexa-gold-tint);
+  color: var(--renexa-gold);
+  flex-shrink: 0;
+}
+
+.planName {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--renexa-ink);
+  margin: 0;
+}
+
+.planDescription {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--renexa-slate-muted);
+  margin: 2px 0 0;
+}
+
+.lines {
+  margin: 0;
+}
+
+.line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  color: var(--renexa-slate);
+  margin-bottom: 10px;
+}
+
+.line dt {
+  font-weight: 400;
+}
+
+.line dd {
+  margin: 0;
+}
+
+.amountMono {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--renexa-ink);
+}
+
+.totalRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--renexa-border);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--renexa-ink);
+}
+
+.totalAmount {
+  font-family: var(--font-mono);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--renexa-success);
+}

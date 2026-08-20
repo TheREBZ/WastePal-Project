@@ -1,0 +1,63 @@
+/**
+ * Renexa — Payment & Subscription design tokens
+ * Import this once, globally (e.g. in your root App.jsx / index.jsx).
+ *
+ * Fonts used (add to your <head> or _document, or self-host):
+ * <link rel="preconnect" href="https://fonts.googleapis.com">
+ * <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+ */
+
+:root {
+  /* ---- Color: brand ---- */
+  --renexa-primary: #2f6fed;
+  --renexa-primary-dark: #1b4fc4;
+  --renexa-primary-tint: #eef3fe; /* selected-state background */
+  --renexa-primary-tint-2: #dfe9fd; /* selected-state border */
+
+  /* ---- Color: neutrals ---- */
+  --renexa-ink: #0b1220; /* headings, high-emphasis text */
+  --renexa-slate: #5b667a; /* body / secondary text */
+  --renexa-slate-muted: #8a93a6; /* captions, helper text */
+  --renexa-border: #e4e8f0;
+  --renexa-border-strong: #d3d9e5;
+  --renexa-surface: #ffffff;
+  --renexa-bg: #f5f7fb;
+
+  /* ---- Color: semantic / accents ---- */
+  --renexa-gold: #f0a93b; /* premium plan accent */
+  --renexa-gold-tint: #fdf3e2;
+  --renexa-success: #12805c;
+  --renexa-success-tint: #e9f8f1;
+  --renexa-danger: #d64545;
+  --renexa-danger-tint: #fceaea;
+
+  /* Paystack's own brand green — kept as-is; this is a third-party mark,
+     not a Renexa token, so don't restyle it to match our palette. */
+  --paystack-green: #0ba84a;
+  --paystack-green-dark: #08893c;
+
+  /* ---- Type ---- */
+  --font-display: "Sora", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace; /* for money amounts */
+
+  /* ---- Radius / elevation ---- */
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+  --shadow-card: 0 1px 2px rgba(11, 18, 32, 0.04), 0 8px 24px rgba(11, 18, 32, 0.06);
+  --shadow-card-hover: 0 2px 4px rgba(11, 18, 32, 0.06), 0 12px 32px rgba(11, 18, 32, 0.08);
+
+  /* ---- Motion ---- */
+  --ease-standard: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --duration-fast: 140ms;
+  --duration-med: 220ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

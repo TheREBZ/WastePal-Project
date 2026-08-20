@@ -1,0 +1,66 @@
+.option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border: 1.5px solid var(--renexa-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  background: var(--renexa-surface);
+  transition: border-color var(--duration-fast) var(--ease-standard),
+    background var(--duration-fast) var(--ease-standard);
+}
+
+.option:hover {
+  border-color: var(--renexa-border-strong);
+}
+
+.optionSelected {
+  border-color: var(--renexa-primary);
+  background: var(--renexa-primary-tint);
+}
+
+/* Visually-hidden but still focusable/operable radio input */
+.radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.option:focus-within {
+  outline: 2px solid var(--renexa-primary);
+  outline-offset: 2px;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: var(--renexa-surface);
+  border: 1px solid var(--renexa-border);
+  flex-shrink: 0;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--renexa-ink);
+}
+
+.description {
+  font-family: var(--font-body);
+  font-size: 12.5px;
+  color: var(--renexa-slate-muted);
+}

@@ -1,5 +1,6 @@
 import "./styles/variables.css";
 import "./styles/globals.css";
+import "./styles/tokens.css";
 import { RouterProvider, useRouter } from "./router/Router";
 
 import Home from "./pages/Home";
@@ -16,6 +17,8 @@ import BookPickup from "./pages/BookPickup";
 import ReviewBooking from "./pages/ReviewBooking";
 import Rewards from "./pages/Rewards";
 import Recycling from "./pages/Recycling";
+import SubscriptionPlanScreen from "./pages/SubscriptionPlanScreen";
+import PaymentCheckoutScreen from "./pages/PaymentCheckoutScreen";
 
 
 const ROUTES = {
@@ -33,6 +36,8 @@ const ROUTES = {
   "/review-booking": ReviewBooking,
   "/rewards": Rewards,
   "/recycling": Recycling,
+  "/subscription-plan": SubscriptionPlanScreen,
+  "/payment-checkout": PaymentCheckoutScreen,
 };
 
 const AppRoutes = () => {
