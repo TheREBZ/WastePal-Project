@@ -17,8 +17,10 @@ import BookPickup from "./pages/BookPickup";
 import ReviewBooking from "./pages/ReviewBooking";
 import Rewards from "./pages/Rewards";
 import Recycling from "./pages/Recycling";
-import SubscriptionPlanScreen from "./pages/SubscriptionPlanScreen";
-import PaymentCheckoutScreen from "./pages/PaymentCheckoutScreen";
+import SubscriptionPlan from "./pages/SubscriptionPlan";
+import PaymentCheckout from "./pages/PaymentCheckout";
+import SubscribeRoute from "./router/SubscribeRoute";
+import CheckoutRoute from "./router/CheckoutRoute";
 
 
 const ROUTES = {
@@ -36,8 +38,10 @@ const ROUTES = {
   "/review-booking": ReviewBooking,
   "/rewards": Rewards,
   "/recycling": Recycling,
-  "/subscription-plan": SubscriptionPlanScreen,
-  "/payment-checkout": PaymentCheckoutScreen,
+  "/subscription-plan": SubscriptionPlan,
+  "/payment-checkout": PaymentCheckout,
+  "/subscribe": SubscribeRoute,
+   "/checkout": CheckoutRoute,
 };
 
 const AppRoutes = () => {

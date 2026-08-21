@@ -42,8 +42,7 @@ const Signup = () => {
     <main className="auth-page">
       <div className="auth-card">
         <div className="auth-logo">
-          <FontAwesomeIcon icon={faLeaf} className="auth-logo-icon" />
-          <span>WastePal</span>
+          <img src="/assets/Horizontal-logo-2.png" alt="Renexa Logo" width={100} height={60} className="auth-logo-icon" />
         </div>
         <h1>Create your account</h1>
         <p className="auth-subtitle">Start optimizing your waste management today.</p>

@@ -5,86 +5,71 @@ import styles from "../styles/SubscriptionPlanScreen.module.css";
 
 /**
  * Renexa — Subscription / plan selection screen.
- * Sits before the checkout screen: the user picks a plan + billing cycle,
- * sees the resulting order summary, then continues to payment.
  *
- * Replace `PLANS` with your real plan catalogue (or pass it in as a prop —
- * left inline here since none was provided in the brief).
+ * Two plan types, not two billing cycles of the same plan:
+ * - "monthly": fixed recurring fee, paid upfront via the checkout screen.
+ * - "custom": pay-per-service — no fixed fee, so there's nothing to check
+ *   out with here. Selecting it just confirms the choice and sends the
+ *   user on to book their first service instead of to /checkout.
+ *
+ * Replace `PLANS` with your real plan data if pricing differs.
  *
  * @param {Object} props
- * @param {(selection: { plan: object, cycle: "monthly" | "annual", amount: number }) => void} props.onContinue
+ * @param {(selection: { plan: object, billingType: "fixed" | "per-service", amount: number | null }) => void} props.onContinue
  */
 export default function SubscriptionPlanScreen({ onContinue }) {
-  const [cycle, setCycle] = useState("monthly");
-  const [selectedPlanId, setSelectedPlanId] = useState("premium");
+  const [selectedPlanId, setSelectedPlanId] = useState("monthly");
 
-  const PLANS = useMemo(
-    () => [
-      {
-        id: "basic",
-        name: "Basic",
-        tagline: "For getting started with Renexa",
-        monthly: 2000,
-        annual: 20000,
-        features: ["Core features", "1 workspace", "Email support"],
-      },
-      {
-        id: "premium",
-        name: "Premium Plan",
-        tagline: "Full access, priced for growing teams",
-        monthly: 5000,
-        annual: 50000,
-        features: [
-          "Everything in Basic",
-          "Unlimited workspaces",
-          "Priority support",
-          "Advanced analytics",
-        ],
-        highlighted: true,
-      },
-    ],
-    []
-  );
+  const PLANS = [
+    {
+      id: "monthly",
+      name: "Monthly Plan",
+      tagline: "One fixed fee, unlimited pickups scheduled",
+      billingType: "fixed",
+      amount: 5000,
+      cadenceLabel: "per month",
+      features: [
+        "Unlimited scheduled pickups",
+        "Priority scheduling",
+        "Rewards on every pickup",
+      ],
+      highlighted: true,
+    },
+    {
+      id: "custom",
+      name: "Custom Plan",
+      tagline: "Pay only for the pickups you book — no monthly fee",
+      billingType: "per-service",
+      amount: 750,
+      priceLabel: "Pay per service",
+      features: [
+        "No recurring charge",
+        "Priced per pickup at checkout",
+        "Cancel or pause anytime",
+      ],
+    },
+  ];
 
   const selectedPlan = PLANS.find((plan) => plan.id === selectedPlanId);
-  const amount = selectedPlan[cycle];
-  const annualSavings = selectedPlan.monthly * 12 - selectedPlan.annual;
+  const isFixedPlan = selectedPlan.billingType === "fixed";
 
   function handleContinue() {
-    onContinue({ plan: selectedPlan, cycle, amount });
+    onContinue({
+      plan: selectedPlan,
+      billingType: selectedPlan.billingType,
+      amount: isFixedPlan ? selectedPlan.amount : null,
+    });
   }
 
   return (
-    <div className={styles.page}>
-      <div className={styles.container}>
+    <div className= "auth-page">
+      <div className="auth-card">
         <header className={styles.header}>
           <h1 className={styles.title}>Choose your plan</h1>
           <p className={styles.subtitle}>
-            Pick the subscription that fits, then continue to payment.
+            Pick the subscription that fits, then continue to Payment.
           </p>
         </header>
-
-        <div className={styles.cycleToggle} role="radiogroup" aria-label="Billing cycle">
-          <button
-            type="button"
-            role="radio"
-            aria-checked={cycle === "monthly"}
-            className={cycle === "monthly" ? styles.cycleActive : styles.cycleOption}
-            onClick={() => setCycle("monthly")}
-          >
-            Monthly
-          </button>
-          <button
-            type="button"
-            role="radio"
-            aria-checked={cycle === "annual"}
-            className={cycle === "annual" ? styles.cycleActive : styles.cycleOption}
-            onClick={() => setCycle("annual")}
-          >
-            Annual
-            <span className={styles.savingsPill}>Save {annualSavings > 0 ? Math.round((annualSavings / (selectedPlan.monthly * 12)) * 100) : 0}%</span>
-          </button>
-        </div>
 
         <div className={styles.grid}>
           <div className={styles.plans}>
@@ -93,8 +78,10 @@ export default function SubscriptionPlanScreen({ onContinue }) {
                 key={plan.id}
                 name={plan.name}
                 tagline={plan.tagline}
-                amount={plan[cycle]}
-                cadenceLabel={cycle === "monthly" ? "per month" : "per year"}
+                pricingType={plan.billingType}
+                amount={plan.amount}
+                cadenceLabel={plan.cadenceLabel}
+                priceLabel={plan.priceLabel}
                 features={plan.features}
                 highlighted={plan.highlighted}
                 selected={plan.id === selectedPlanId}
@@ -104,13 +91,25 @@ export default function SubscriptionPlanScreen({ onContinue }) {
           </div>
 
           <div className={styles.summaryColumn}>
-            <OrderSummaryCard
-              planName={selectedPlan.name}
-              planDescription={cycle === "monthly" ? "Monthly subscription" : "Annual subscription"}
-              amount={amount}
-            />
-            <button type="button" className={styles.continueButton} onClick={handleContinue}>
-              Continue to payment
+            {isFixedPlan ? (
+              <OrderSummaryCard
+                planName={selectedPlan.name}
+                planDescription="Monthly subscription"
+                amount={selectedPlan.amount}
+              />
+            ) : (
+              <div className={styles.customNotice}>
+                <h2 className={styles.customNoticeHeading}>Custom Plan</h2>
+                <p className={styles.customNoticeText}>
+                  There's no subscription fee to pay today. You'll see the
+                  price for each pickup when you book it, and only pay for
+                  the services you use.
+                </p>
+              </div>
+            )}
+
+            <button type="button" className= "btn btn-block btn-primary" onClick={handleContinue}>
+              {isFixedPlan ? "Continue to payment" : "Continue to book a pickup"}
             </button>
           </div>
         </div>

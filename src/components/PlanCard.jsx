@@ -15,8 +15,10 @@ import styles from "../styles/PlanCard.module.css";
 export default function PlanCard({
   name,
   tagline,
+  pricingType,
   amount,
   cadenceLabel,
+  priceLabel,
   features,
   highlighted,
   selected,
@@ -33,10 +35,14 @@ export default function PlanCard({
       <h3 className={styles.name}>{name}</h3>
       <p className={styles.tagline}>{tagline}</p>
 
-      <p className={styles.price}>
-        <span className={styles.priceAmount}>{formatNaira(amount)}</span>
-        <span className={styles.priceCadence}>{cadenceLabel}</span>
-      </p>
+      {pricingType === "fixed" ? (
+        <p className={styles.price}>
+          <span className={styles.priceAmount}>{formatNaira(amount)}</span>
+          <span className={styles.priceCadence}>{cadenceLabel}</span>
+        </p>
+      ) : (
+        <p className={styles.priceCustom}>{priceLabel}</p>
+      )}
 
       <ul className={styles.features}>
         {features.map((feature) => (

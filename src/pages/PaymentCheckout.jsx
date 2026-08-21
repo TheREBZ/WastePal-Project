@@ -92,7 +92,7 @@ export default function PaymentCheckoutScreen({
               {status !== "ready" && status !== "redirecting" && (
                 <button
                   type="button"
-                  className={styles.primaryButton}
+                  className= "btn btn-block btn-primary"
                   onClick={handleGenerateLink}
                   disabled={status === "generating"}
                 >
@@ -109,7 +109,7 @@ export default function PaymentCheckoutScreen({
               {(status === "ready" || status === "redirecting") && (
                 <button
                   type="button"
-                  className={styles.paystackButton}
+                  className= "btn btn-block btn-primary"
                   onClick={handlePayWithPaystack}
                   disabled={status === "redirecting"}
                 >
