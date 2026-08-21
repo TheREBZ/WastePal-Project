@@ -308,7 +308,7 @@ const Dashboard = () => {
               : activeView === "reports" ? "Reports" 
               : activeView === "support" ? "Support" 
               : activeView === "rewards" ? "Rewards" 
-              : `Hello, Esther`}</h1>
+              : `Hey, There`}</h1>
             <p>
               {activeView === "settings"
                 ? "Manage your personal information, addresses, and account preferences."
