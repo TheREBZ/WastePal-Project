@@ -20,6 +20,8 @@ import DashboardOverview from "../components/DashboardOverview";
 import DashboardSettings from "../components/DashboardSettings";
 import BookPickup from "./BookPickup";
 import "../styles/Dashboard.css";
+import { getCurrentUser, getAccessToken, clearAuthSession } from "../services/authStorage";
+import { logoutUser } from "../services/authService";
 
 const NAV_ITEMS = [
   { key: "overview", label: "Overview", icon: faGaugeHigh },
@@ -84,14 +86,26 @@ const Dashboard = () => {
   const [activeView, setActiveView] = useState("overview");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [expandedReportId, setExpandedReportId] = useState(null);
+  const user = getCurrentUser();
 
   const handleNav = (key) => {
     setActiveView(key);
     setSidebarOpen(false);
   };
 
-  const handleLogout = () => {
-    navigate("/login");
+  const handleLogout = async () => {
+    const accessToken = getAccessToken();
+  
+    try {
+      if (accessToken) {
+        await logoutUser(accessToken);
+      }
+    } catch (error) {
+      console.error("Logout request failed:", error);
+    } finally {
+      clearAuthSession();
+      navigate("/login");
+    }
   };
 
   const toggleReport = (id) => {
@@ -302,13 +316,19 @@ const Dashboard = () => {
       <div className="dash-main">
         <header className="dash-topbar">
           <div>
-            <h1>{activeView === "settings" ? "Settings" 
-              : activeView === "book-pickup" ? "Book-pickup" 
-              : activeView === "recycling" ? "Recycling" 
-              : activeView === "reports" ? "Reports" 
-              : activeView === "support" ? "Support" 
-              : activeView === "rewards" ? "Rewards" 
-              : `Hey, There`}</h1>
+            <h1>{activeView === "settings"
+            ? "Settings"
+            : activeView === "book-pickup"
+            ? "Book-pickup"
+            : activeView === "recycling"
+            ? "Recycling"
+            : activeView === "reports"
+            ? "Reports"
+            : activeView === "support"
+            ? "Support"
+            : activeView === "rewards"
+            ? "Rewards"
+            : `Hey, ${user?.firstName || "there"}`}</h1>
             <p>
               {activeView === "settings"
                 ? "Manage your personal information, addresses, and account preferences."
