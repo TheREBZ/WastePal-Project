@@ -26,6 +26,7 @@ import "../styles/Dashboard.css";
 import { getCurrentUser, getAccessToken, clearAuthSession } from "../services/authStorage";
 import { logoutUser } from "../services/authService";
 import DashboardSubscription from "../components/DashboardSubscription";
+import dashboardLogo from "../assets/Horizontal-Logo-5.png";
 
 const NAV_ITEMS = [
   { key: "overview", label: "Overview", icon: faGaugeHigh },
@@ -305,7 +306,13 @@ const Dashboard = () => {
       <aside className={`dash-sidebar ${sidebarOpen ? "dash-sidebar--open" : ""}`}>
         <div className="dash-logo">
           <div>
-            <img src="/assets/Horizontal-Logo-5.png" alt="Renexa Logo" className="footer-logo-icon" width={100} height={60} />
+          <img
+            src={dashboardLogo}
+            alt="ReNexa Logo"
+            className="footer-logo-icon"
+            width={100}
+            height={60}
+          />
             <span>Version 0.01 (Beta)</span>
           </div>
         </div>
