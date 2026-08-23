@@ -16,6 +16,7 @@ import {
   faEllipsis,
   faUsers,
   faClipboardList,
+  faCreditCard,
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "../router/Router";
 import DashboardOverview from "../components/DashboardOverview";
@@ -24,6 +25,7 @@ import BookPickup from "./BookPickup";
 import "../styles/Dashboard.css";
 import { getCurrentUser, getAccessToken, clearAuthSession } from "../services/authStorage";
 import { logoutUser } from "../services/authService";
+import DashboardSubscription from "../components/DashboardSubscription";
 
 const NAV_ITEMS = [
   { key: "overview", label: "Overview", icon: faGaugeHigh },
@@ -32,6 +34,7 @@ const NAV_ITEMS = [
   { key: "recycling", label: "Recycling", icon: faRecycle },
   { key: "reports", label: "Reports", icon: faFileLines },
   { key: "support", label: "Support", icon: faHeadset },
+  { key: "subscription", label: "Subscription", icon: faCreditCard, }, // subscription (currently mock informations)
   { key: "settings", label: "Settings", icon: faGear },
 ];
 
@@ -270,6 +273,7 @@ const Dashboard = () => {
   const renderContent = () => {
     if (activeView === "overview") return <DashboardOverview onNavigate={handleNav} />;
     if (activeView === "book-pickup") return <BookPickup />;
+    if (activeView === "subscription") {return <DashboardSubscription />;}
     if (activeView === "settings") return <DashboardSettings />;
     if (activeView === "reports") return renderReports();
     if (activeView === "support") return renderSupport();
@@ -300,9 +304,8 @@ const Dashboard = () => {
 
       <aside className={`dash-sidebar ${sidebarOpen ? "dash-sidebar--open" : ""}`}>
         <div className="dash-logo">
-          <FontAwesomeIcon icon={faLeaf} className="dash-logo-icon" />
           <div>
-            <p>Renexa</p>
+            <img img src="Public/assets/Horizontal-Logo-5.png" alt="Renexa Logo" className="footer-logo-icon" width={100} height={60} />
             <span>Version 0.01 (Beta)</span>
           </div>
         </div>
@@ -372,6 +375,8 @@ const Dashboard = () => {
             ? "Support"
             : activeView === "rewards"
             ? "Rewards"
+            : activeView === "subscription"
+            ? "Subscription"
             : `Hey, ${user?.firstName || "there"}`}</h1>
             <p>
               {activeView === "settings"
@@ -381,6 +386,7 @@ const Dashboard = () => {
                 : activeView === "rewards" ? "Here's an overview of your points and rewards accumulated"
                 : activeView === "reports" ? "Here's your waste booking history reports"
                 : activeView === "support" ? "Reach out to our support agents for assistance"
+                : activeView === "subscription" ? "Manage your ReNexa plan and subscription."
                 : "Welcome to your profile dashboard"}
             </p>
           </div>

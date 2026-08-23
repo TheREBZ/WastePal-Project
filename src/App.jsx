@@ -24,6 +24,8 @@ import AdminEventLog from "./pages/AdminEventLog";
 import ReviewBooking from "./pages/ReviewBooking";
 import RequireAdmin from "./components/RequireAdmin";
 import GoogleCallback from "./pages/GoogleCallback";
+import Checkout from "./pages/Checkout";
+import PaymentConfirmation from "./pages/PaymentConfirmation";
 
 const ProtectedAdminPickerDash = () => (
   <RequireAdmin>
@@ -59,6 +61,8 @@ const ROUTES = {
   "/adminevents": ProtectedAdminEventLog,
   "/review-booking": ReviewBooking,
   "/oauth/callback": GoogleCallback,
+  "/checkout": Checkout,
+  "/payment-confirmation": PaymentConfirmation,
 };
 
 const AppRoutes = () => {
