@@ -36,6 +36,7 @@
 .auth-card h1 {
   text-align: center;
   font-size: 22px;
+  font-weight: var(--fw-bold);
   color: var(--charcoal-grey);
   margin-bottom: 6px;
 }
@@ -43,6 +44,7 @@
 .auth-subtitle {
   text-align: center;
   font-size: 13.5px;
+  font-weight: var(--fw-medium);
   color: var(--text-muted);
   margin-bottom: 24px;
 }
@@ -122,6 +124,7 @@
 
 .auth-card .btn {
   margin-top: 4px;
+  margin-bottom: 10px;
 }
 
 .auth-footer {
