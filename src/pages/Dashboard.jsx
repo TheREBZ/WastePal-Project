@@ -305,7 +305,7 @@ const Dashboard = () => {
       <aside className={`dash-sidebar ${sidebarOpen ? "dash-sidebar--open" : ""}`}>
         <div className="dash-logo">
           <div>
-            <img img src="Public/assets/Horizontal-Logo-5.png" alt="Renexa Logo" className="footer-logo-icon" width={100} height={60} />
+            <img src="Public/assets/Horizontal-Logo-5.png" alt="Renexa Logo" className="footer-logo-icon" width={100} height={60} />
             <span>Version 0.01 (Beta)</span>
           </div>
         </div>

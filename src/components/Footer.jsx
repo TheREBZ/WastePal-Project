@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="footer-inner">
         <div className="footer-brand">
           <div className="footer-logo">
-            <img img src="Public/assets/Horizontal-logo-2.png" alt="Renexa Logo" className="footer-logo-icon" width={100} height={60} />
+            < img src="Public/assets/Horizontal-logo-2.png" alt="Renexa Logo" className="footer-logo-icon" width={100} height={60} />
           </div>
           <p>© {new Date().getFullYear()} Renexa. Eco-friendly waste management solutions.</p>
         </div>
