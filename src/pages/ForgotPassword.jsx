@@ -4,6 +4,7 @@ import { faLeaf, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import Link from "../router/Link";
 import { useRouter } from "../router/Router";
 import "../styles/Auth.css";
+import { forgotPassword } from "../services/authService";
 
 const ForgotPassword = () => {
   const { navigate } = useRouter();
@@ -13,7 +14,7 @@ const ForgotPassword = () => {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     setError("");
@@ -30,14 +31,23 @@ const ForgotPassword = () => {
 
     setSubmitting(true);
 
-    // API integration will be added later.
-    // POST:
-    // https://renexa.onrender.com/api/auth/forgot-password
-
-    setTimeout(() => {
-      setSubmitting(false);
+    try {
+      await forgotPassword(email.trim().toLowerCase());
       setSubmitted(true);
-    }, 700);
+    } catch (err) {
+      // The backend returns a 404 for an email that doesn't exist.
+      // We deliberately show the same generic success screen either
+      // way, so this page never reveals whether an email is
+      // registered — only genuinely unexpected errors (network
+      // issues, server errors) get shown to the user.
+      if (err.message?.toLowerCase().includes("not found")) {
+        setSubmitted(true);
+      } else {
+        setError(err.message || "Something went wrong. Please try again.");
+      }
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (

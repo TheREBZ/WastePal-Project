@@ -13,7 +13,9 @@ import {
   faArrowRightFromBracket,
   faBell,
   faCircleCheck,
-  faEllipsis
+  faEllipsis,
+  faUsers,
+  faClipboardList,
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "../router/Router";
 import DashboardOverview from "../components/DashboardOverview";
@@ -31,6 +33,13 @@ const NAV_ITEMS = [
   { key: "reports", label: "Reports", icon: faFileLines },
   { key: "support", label: "Support", icon: faHeadset },
   { key: "settings", label: "Settings", icon: faGear },
+];
+
+// Admin roles items
+
+const ADMIN_NAV_ITEMS = [
+  { key: "admin-picker", label: "Picker Dashboard", icon: faUsers, route: "/adminpicker" },
+  { key: "admin-events", label: "Event Logs", icon: faClipboardList, route: "/adminevents" },
 ];
 
 const PLACEHOLDER_COPY = {
@@ -91,6 +100,11 @@ const Dashboard = () => {
   const handleNav = (key) => {
     setActiveView(key);
     setSidebarOpen(false);
+  };
+
+  const handleAdminNav = (route) => {
+    setSidebarOpen(false);
+    navigate(route);
   };
 
   const handleLogout = async () => {
@@ -289,7 +303,7 @@ const Dashboard = () => {
           <FontAwesomeIcon icon={faLeaf} className="dash-logo-icon" />
           <div>
             <p>Renexa</p>
-            <span>Version 0.01</span>
+            <span>Version 0.01 (Beta)</span>
           </div>
         </div>
 
@@ -305,6 +319,36 @@ const Dashboard = () => {
               {item.label}
             </button>
           ))}
+
+          {user?.role === "admin" && (
+            <>
+              <p
+                style={{
+                  margin: "16px 0 4px",
+                  padding: "0 12px",
+                  fontSize: "11px",
+                  fontWeight: 600,
+                  letterSpacing: "0.05em",
+                  textTransform: "uppercase",
+                  color: "#8a8a8a",
+                }}
+              >
+                Admin
+              </p>
+
+              {ADMIN_NAV_ITEMS.map((item) => (
+                <button
+                  key={item.key}
+                  type="button"
+                  className="dash-nav-item"
+                  onClick={() => handleAdminNav(item.route)}
+                >
+                  <FontAwesomeIcon icon={item.icon} />
+                  {item.label}
+                </button>
+              ))}
+            </>
+          )}
         </nav>
 
         <button type="button" className="dash-logout" onClick={handleLogout}>
@@ -332,7 +376,7 @@ const Dashboard = () => {
             <p>
               {activeView === "settings"
                 ? "Manage your personal information, addresses, and account preferences."
-                : activeView === "book-pickup" ? "Create an order for your waste to be picked"
+                : activeView === "book-pickup" ? "Create an order for your waste to be collected"
                 : activeView === "recycling" ? "Here's how we turn your waste into reuseable and sustainable products"
                 : activeView === "rewards" ? "Here's an overview of your points and rewards accumulated"
                 : activeView === "reports" ? "Here's your waste booking history reports"
@@ -344,9 +388,6 @@ const Dashboard = () => {
             <button type="button" className="dash-icon-btn" aria-label="Notifications">
               <FontAwesomeIcon icon={faBell} />
             </button>
-            <div className="dash-avatar" aria-hidden="true">
-              E
-            </div>
           </div>
         </header>
 

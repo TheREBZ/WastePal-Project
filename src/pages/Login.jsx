@@ -4,7 +4,7 @@ import { faLeaf } from "@fortawesome/free-solid-svg-icons";
 import Link from "../router/Link";
 import { useRouter } from "../router/Router";
 import "../styles/Auth.css";
-import { loginUser } from "../services/authService";
+import { loginUser, getGoogleAuthUrl } from "../services/authService";
 import { saveAuthSession } from "../services/authStorage";
 
 const Login = () => {
@@ -111,7 +111,7 @@ const Login = () => {
             type="button"
             className="btn btn-primary btn-block"
             onClick={() => {
-              console.log("Google login coming soon");
+              window.location.href = getGoogleAuthUrl();
             }}
           >
             Login with Google

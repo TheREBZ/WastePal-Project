@@ -1,16 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLeaf,
   faLock,
   faCircleCheck,
+  faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "../router/Link";
 import { useRouter } from "../router/Router";
 import "../styles/Auth.css";
+import { resetPassword } from "../services/authService";
 
 const ResetPassword = () => {
   const { navigate } = useRouter();
+
+  const [token, setToken] = useState(null);
+  const [tokenMissing, setTokenMissing] = useState(false);
 
   const [form, setForm] = useState({
     password: "",
@@ -21,14 +26,21 @@ const ResetPassword = () => {
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  /*
-    The backend sends the reset token as part of the reset URL:
+  // The backend's reset link points here as:
+  // https://renexa.vercel.app/reset-password?token=<token>
+  // Our router only matches exact paths (no /:token segments), so
+  // the token travels as a query param instead and we read it
+  // straight from the browser URL.
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const urlToken = params.get("token");
 
-    /reset-password/:token
-
-    We'll extract that token when we connect the real API.
-    For now, the page is frontend-only.
-  */
+    if (!urlToken) {
+      setTokenMissing(true);
+    } else {
+      setToken(urlToken);
+    }
+  }, []);
 
   const handleChange = (field) => (e) => {
     setForm((prev) => ({
@@ -70,29 +82,73 @@ const ResetPassword = () => {
     return Object.keys(next).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validate()) return;
 
+    if (!token) {
+      setErrors((prev) => ({
+        ...prev,
+        form: "This reset link is invalid or missing a token. Please request a new one.",
+      }));
+      return;
+    }
+
     setSubmitting(true);
+    setErrors((prev) => ({ ...prev, form: "" }));
 
-    // API integration will be added later.
-    //
-    // POST:
-    // /api/auth/reset-password/:token
-    //
-    // Body:
-    // {
-    //   password,
-    //   confirmPassword
-    // }
-
-    setTimeout(() => {
-      setSubmitting(false);
+    try {
+      await resetPassword(token, form.password, form.confirmPassword);
       setSuccess(true);
-    }, 700);
+    } catch (err) {
+      setErrors((prev) => ({
+        ...prev,
+        form: err.message || "Unable to reset your password. Please try again.",
+      }));
+    } finally {
+      setSubmitting(false);
+    }
   };
+
+  if (tokenMissing) {
+    return (
+      <main className="auth-page">
+        <div className="auth-card">
+
+          <div className="auth-logo">
+            <FontAwesomeIcon
+              icon={faLeaf}
+              className="auth-logo-icon"
+            />
+            <span>ReNexa</span>
+          </div>
+
+          <div className="forgot-success">
+            <div className="forgot-success-icon">
+              <FontAwesomeIcon icon={faTriangleExclamation} />
+            </div>
+
+            <h1>Invalid reset link</h1>
+
+            <p className="auth-subtitle">
+              This password reset link is missing or invalid.
+              Please request a new one.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            className="btn btn-primary btn-block"
+            onClick={() => navigate("/forgot-password")}
+          >
+            Request New Link
+          </button>
+
+        </div>
+      </main>
+    );
+  }
 
   if (success) {
     return (
@@ -196,6 +252,12 @@ const ResetPassword = () => {
               </em>
             )}
           </label>
+
+          {errors.form && (
+            <em className="field-error">
+              {errors.form}
+            </em>
+          )}
 
           <button
             type="submit"

@@ -14,7 +14,7 @@ import {
   clearRegistrationData,
 } from "../services/registrationStorage";
 import { completeProfile } from "../services/authService";
-import { getAccessToken } from "../services/authStorage";
+import { getAccessToken, getRefreshToken, getCurrentUser, saveAuthSession } from "../services/authStorage";
 
 const BusinessProfile = () => {
   const { navigate } = useRouter();
@@ -91,7 +91,7 @@ const BusinessProfile = () => {
       // exactly: role, businessName, businessType, businesscity,
       // businessLga, businessAddress — note "businesscity" is lowercase
       // "c" on the backend, matching that exactly here.
-      await completeProfile(
+      const response = await completeProfile(
         {
           role: "business_owner",
           businessName: form.businessName.trim(),
@@ -102,6 +102,18 @@ const BusinessProfile = () => {
         },
         accessToken
       );
+
+      // Merge the updated user (now with business fields) into the
+      // stored session so Dashboard/Settings see it immediately.
+      const updatedUser = response?.data?.user;
+
+      if (updatedUser) {
+        saveAuthSession({
+          accessToken,
+          refreshToken: getRefreshToken(),
+          user: { ...getCurrentUser(), ...updatedUser },
+        });
+      }
 
       clearRegistrationData();
       navigate("/dashboard");

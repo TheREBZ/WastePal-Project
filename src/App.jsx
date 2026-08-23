@@ -22,6 +22,20 @@ import HouseholdProfile from "./pages/HouseholdProfile";
 import BusinessProfile from "./pages/BusinessProfile";
 import AdminEventLog from "./pages/AdminEventLog";
 import ReviewBooking from "./pages/ReviewBooking";
+import RequireAdmin from "./components/RequireAdmin";
+import GoogleCallback from "./pages/GoogleCallback";
+
+const ProtectedAdminPickerDash = () => (
+  <RequireAdmin>
+    <AdminPickerDash />
+  </RequireAdmin>
+);
+
+const ProtectedAdminEventLog = () => (
+  <RequireAdmin>
+    <AdminEventLog />
+  </RequireAdmin>
+);
 
 const ROUTES = {
   "/": Home,
@@ -36,14 +50,15 @@ const ROUTES = {
   "/about": AboutUs,
   "/contact": Contact,
   "/dashboard": Dashboard,
-  "/adminpicker": AdminPickerDash,
+  "/adminpicker": ProtectedAdminPickerDash,
   "/verify-email": VerifyEmail,
   "/reset-password": ResetPassword,
   "/register-as": RegisterAs,
   "/household-profile": HouseholdProfile,
   "/business-profile": BusinessProfile,
-  "/adminevents": AdminEventLog,
+  "/adminevents": ProtectedAdminEventLog,
   "/review-booking": ReviewBooking,
+  "/oauth/callback": GoogleCallback,
 };
 
 const AppRoutes = () => {

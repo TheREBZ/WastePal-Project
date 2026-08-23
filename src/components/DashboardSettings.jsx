@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUser,
   faLocationDot,
-  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { updateProfile } from "../services/authService";
 import {
@@ -86,7 +85,7 @@ const DashboardSettings = () => {
           saveAuthSession({
             accessToken,
             refreshToken,
-            user: userFromResponse,
+            user: { ...getCurrentUser(), ...userFromResponse },
           });
 
           setProfile((prev) => ({
@@ -108,6 +107,51 @@ const DashboardSettings = () => {
           error.message || "Unable to update notification settings."
         );
       }
+    }
+  };
+
+  const handleLanguageChange = async (e) => {
+    const newLanguage = e.target.value;
+    const previousLanguage = language;
+
+    setLanguage(newLanguage);
+    setSavedMessage("");
+    setErrorMessage("");
+
+    try {
+      const accessToken = getAccessToken();
+
+      if (!accessToken) {
+        throw new Error("Your session has expired. Please log in again.");
+      }
+
+      const response = await updateProfile(
+        {
+          preferredLanguage: newLanguage,
+        },
+        accessToken
+      );
+
+      const userFromResponse =
+        response?.data?.user ||
+        response?.user ||
+        response?.data ||
+        null;
+
+      if (userFromResponse) {
+        saveAuthSession({
+          accessToken,
+          refreshToken: sessionStorage.getItem("renexa_refresh_token"),
+          user: { ...getCurrentUser(), ...userFromResponse },
+        });
+      }
+    } catch (error) {
+      // Revert if the API update fails.
+      setLanguage(previousLanguage);
+
+      setErrorMessage(
+        error.message || "Unable to update language preference."
+      );
     }
   };
 
@@ -263,28 +307,62 @@ const DashboardSettings = () => {
         <section className="dash-panel">
           <div className="dash-panel-header">
             <h2>Addresses</h2>
-
-            <button type="button" className="dash-link-btn">
-              <FontAwesomeIcon icon={faPlus} /> Add
-            </button>
           </div>
 
           <div className="dash-address-list">
-            <div className="dash-address-item">
-              <span className="dash-address-icon">
-                <FontAwesomeIcon icon={faLocationDot} />
-              </span>
+            {currentUser?.role === "household" ? (
+              <div className="dash-address-item">
+                <span className="dash-address-icon">
+                  <FontAwesomeIcon icon={faLocationDot} />
+                </span>
 
-              <div>
-                <p className="dash-table-primary">
-                  Primary Address
-                </p>
+                <div>
+                  <p className="dash-table-primary">
+                    Home Address
+                  </p>
 
-                <p className="dash-table-secondary">
-                  Address management will be connected to your profile shortly.
-                </p>
+                  <p className="dash-table-secondary">
+                    {currentUser.residentialAddress}
+                    {currentUser.city ? `, ${currentUser.city}` : ""}
+                    {currentUser.lga ? `, ${currentUser.lga}` : ""}
+                  </p>
+                </div>
               </div>
-            </div>
+            ) : currentUser?.role === "business_owner" ? (
+              <div className="dash-address-item">
+                <span className="dash-address-icon">
+                  <FontAwesomeIcon icon={faLocationDot} />
+                </span>
+
+                <div>
+                  <p className="dash-table-primary">
+                    {currentUser.businessName || "Business Address"}
+                  </p>
+
+                  <p className="dash-table-secondary">
+                    {currentUser.businessAddress}
+                    {currentUser.businesscity ? `, ${currentUser.businesscity}` : ""}
+                    {currentUser.businessLga ? `, ${currentUser.businessLga}` : ""}
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div className="dash-address-item">
+                <span className="dash-address-icon">
+                  <FontAwesomeIcon icon={faLocationDot} />
+                </span>
+
+                <div>
+                  <p className="dash-table-primary">
+                    No address on file
+                  </p>
+
+                  <p className="dash-table-secondary">
+                    Complete your profile to add an address.
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
 
           <h2 className="dash-preferences-title">
@@ -380,7 +458,7 @@ const DashboardSettings = () => {
 
             <select
               value={language}
-              onChange={(e) => setLanguage(e.target.value)}
+              onChange={handleLanguageChange}
             >
               <option>English (US)</option>
               <option>English (UK)</option>

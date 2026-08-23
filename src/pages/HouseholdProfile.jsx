@@ -13,7 +13,7 @@ import {
   clearRegistrationData,
 } from "../services/registrationStorage";
 import { completeProfile } from "../services/authService";
-import { getAccessToken } from "../services/authStorage";
+import { getAccessToken, getRefreshToken, getCurrentUser, saveAuthSession } from "../services/authStorage";
 
 const HouseholdProfile = () => {
   const { navigate } = useRouter();
@@ -78,7 +78,7 @@ const HouseholdProfile = () => {
     try {
       // Backend's completeProfileSchema (household branch) expects
       // exactly: role, lga, city, residentialAddress
-      await completeProfile(
+      const response = await completeProfile(
         {
           role: "household",
           city: form.city.trim(),
@@ -87,6 +87,18 @@ const HouseholdProfile = () => {
         },
         accessToken
       );
+
+      // Merge the updated user (now with address fields) into the
+      // stored session so Dashboard/Settings see it immediately.
+      const updatedUser = response?.data?.user;
+
+      if (updatedUser) {
+        saveAuthSession({
+          accessToken,
+          refreshToken: getRefreshToken(),
+          user: { ...getCurrentUser(), ...updatedUser },
+        });
+      }
 
       // Registration is complete — no need to keep the staging data around.
       clearRegistrationData();

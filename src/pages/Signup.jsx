@@ -11,7 +11,7 @@ import Link from "../router/Link";
 import { useRouter } from "../router/Router";
 import "../styles/Auth.css";
 import { saveRegistrationData } from "../services/registrationStorage";
-import { registerUser } from "../services/authService";
+import { registerUser, getGoogleAuthUrl } from "../services/authService";
 
 const Signup = () => {
   const { navigate } = useRouter();
@@ -126,7 +126,6 @@ const Signup = () => {
 
       // Email + password are kept only long enough to silently log the
       // user in right after OTP verification (VerifyEmail.jsx), since
-      // /auth/register and /auth/verify-email don't return tokens.
       // VerifyEmail.jsx clears the password out of storage once that
       // login call succeeds.
       saveRegistrationData({
@@ -149,7 +148,7 @@ const Signup = () => {
   };
 
   const handleGoogleSignup = () => {
-    // Google authentication will be implemented later.
+    window.location.href = getGoogleAuthUrl();
   };
 
   return (

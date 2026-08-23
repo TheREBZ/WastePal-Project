@@ -5,37 +5,86 @@ import {
   faRecycle,
   faLightbulb,
 } from "@fortawesome/free-solid-svg-icons";
+import { getAccessToken } from "../services/authStorage";
+import {
+  getMyBookings,
+  getBookingStatusLabel,
+} from "../services/bookingService";
 
 const DashboardOverview = ({ onNavigate }) => {
   const [bookings, setBookings] = useState([]);
+  const [loadingBookings, setLoadingBookings] = useState(true);
+  const [bookingError, setBookingError] = useState("");
 
   useEffect(() => {
-    const savedBookings = JSON.parse(
-      localStorage.getItem("wastepal-bookings") || "[]"
-    );
-
-    setBookings(savedBookings);
+    const loadBookings = async () => {
+      const accessToken = getAccessToken();
+  
+      if (!accessToken) {
+        setLoadingBookings(false);
+        return;
+      }
+  
+      try {
+        const response = await getMyBookings(accessToken);
+  
+        const bookingData =
+          response?.data?.bookings ||
+          response?.data ||
+          [];
+  
+        setBookings(
+          Array.isArray(bookingData) ? bookingData : []
+        );
+      } catch (error) {
+        console.error("Unable to load bookings:", error);
+  
+        setBookingError(
+          "Unable to load your pickup requests right now."
+        );
+      } finally {
+        setLoadingBookings(false);
+      }
+    };
+  
+    loadBookings();
   }, []);
 
-  /*
-   * Total waste collected
-   *
-   * We only count bookings that have an actual weight value.
-   * Until the booking/backend flow provides weight data,
-   * the dashboard correctly displays 0 kg instead of inventing a number.
-   */
-  const totalWasteCollected = useMemo(() => {
-    return bookings.reduce((total, booking) => {
-      const weight = Number(
-        booking.weight ||
-        booking.wasteWeight ||
-        booking.weightKg ||
-        0
-      );
+  const normalizeBooking = (booking) => ({
+    id: booking.booking_id || booking.id,
+    wasteType: booking.waste_type || "",
+    address: booking.pickup_address || "",
+    date: booking.pickup_date || "",
+    time: booking.pickup_time || "",
+    quantity: booking.quantity || 0,
+    bagSize: booking.bagSize || "",
+    status: booking.status || "booked",
+  });
 
-      return total + (Number.isFinite(weight) ? weight : 0);
-    }, 0);
-  }, [bookings]);
+  const normalizedBookings = useMemo(
+    () => bookings.map(normalizeBooking),
+    [bookings]
+  );
+  const upcomingBookings = useMemo(() => {
+    return normalizedBookings
+      .filter((booking) =>
+        ["booked", "claimed"].includes(booking.status)
+      )
+      .filter((booking) => booking.date)
+      .sort((a, b) => {
+        const first = new Date(
+          `${a.date}T${a.time || "00:00"}`
+        );
+  
+        const second = new Date(
+          `${b.date}T${b.time || "00:00"}`
+        );
+  
+        return first - second;
+      });
+  }, [normalizedBookings]);
+  
+  const totalWasteCollected = 0;
 
   /*
    * Find the next upcoming booking.
@@ -43,31 +92,7 @@ const DashboardOverview = ({ onNavigate }) => {
    * For now we use the booking date stored by the existing
    * frontend booking system.
    */
-  const nextBooking = useMemo(() => {
-    if (!bookings.length) return null;
-
-    const now = new Date();
-
-    const upcoming = bookings
-      .map((booking) => {
-        const dateTime = new Date(
-          `${booking.date || ""} ${booking.time || ""}`
-        );
-
-        return {
-          ...booking,
-          parsedDate: dateTime,
-        };
-      })
-      .filter(
-        (booking) =>
-          !Number.isNaN(booking.parsedDate.getTime()) &&
-          booking.parsedDate >= now
-      )
-      .sort((a, b) => a.parsedDate - b.parsedDate);
-
-    return upcoming[0] || null;
-  }, [bookings]);
+  const nextBooking = upcomingBookings[0] || null;
 
   const formatNextPickup = () => {
     if (!nextBooking) return "No upcoming pickup";
@@ -76,9 +101,33 @@ const DashboardOverview = ({ onNavigate }) => {
   };
 
   const formatNextPickupTime = () => {
-    if (!nextBooking) return "Schedule a pickup to get started";
+    if (!nextBooking) {
+      return "Schedule a pickup to get started";
+    }
+  
+    return `${nextBooking.time || "Time not set"} • ${getBookingStatusLabel(
+      nextBooking.status
+    )}`;
+  };
 
-    return nextBooking.time || "Time not set";
+  const getStatusClass = (status) => {
+    switch (status) {
+      case "booked":
+        return "dash-status--pending";
+  
+      case "claimed":
+        return "dash-status--confirmed";
+  
+      case "completed":
+        return "dash-status--completed";
+  
+      case "failed":
+      case "cancelled":
+        return "dash-status--failed";
+  
+      default:
+        return "dash-status--pending";
+    }
   };
 
   return (
@@ -106,11 +155,11 @@ const DashboardOverview = ({ onNavigate }) => {
           </div>
 
           <p className="dash-card-value">
-            {bookings.length}
+            {normalizedBookings.length}
           </p>
 
           <p className="dash-progress-label">
-            {bookings.length === 1
+            {normalizedBookings.length === 1
               ? "Pickup booking made"
               : "Pickup bookings made"}
           </p>
@@ -159,7 +208,18 @@ const DashboardOverview = ({ onNavigate }) => {
               See all
             </button>
           </div>
+          
+          {loadingBookings && (
+            <p className="dash-table-secondary">
+              Loading pickup requests...
+            </p>
+          )}
 
+          {bookingError && (
+            <p className="field-error">
+              {bookingError}
+            </p>
+          )}
           <table className="dash-table">
             <thead>
               <tr>
@@ -171,8 +231,8 @@ const DashboardOverview = ({ onNavigate }) => {
             </thead>
 
             <tbody className="dash-table-body">
-              {bookings.length > 0 ? (
-                bookings.map((booking) => (
+            {upcomingBookings.length > 0 ? (
+              upcomingBookings.map((booking) => (
                   <tr key={booking.id}>
                     <td>
                       <p className="dash-table-primary">
@@ -197,15 +257,13 @@ const DashboardOverview = ({ onNavigate }) => {
                     </td>
 
                     <td>
-                      <span
-                        className={`dash-status ${
-                          booking.status === "Confirmed"
-                            ? "dash-status--confirmed"
-                            : "dash-status--pending"
-                        }`}
-                      >
-                        {booking.status || "Pending"}
-                      </span>
+                    <span
+                      className={`dash-status ${getStatusClass(
+                        booking.status
+                      )}`}
+                    >
+                      {getBookingStatusLabel(booking.status)}
+                    </span>
                     </td>
                   </tr>
                 ))

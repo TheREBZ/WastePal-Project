@@ -3,10 +3,10 @@ import { useRouter } from "../router/Router";
 import "../styles/BookPickup.css";
 
 const initialForm = {
-  wasteType: "Plastic",
+  wasteType: "plastic",
   address: "",
   bag: "1",
-  bagSize: "Big",
+  bagSize: "large",
   date: "",
   time: "",
 };
@@ -82,12 +82,12 @@ const BookPickup = () => {
               value={formData.wasteType}
               onChange={handleChange}
             >
-              <option>Plastic</option>
-              <option>Paper</option>
-              <option>E-waste</option>
-              <option>Metal</option>
-              <option>Glass</option>
-              <option>Others</option>
+              <option value="plastic">Plastic</option>
+              <option value="paper">Paper</option>
+              <option value="e_waste">E-waste</option>
+              <option value="metal">Metal</option>
+              <option value="glass">Glass</option>
+              <option value="other">Others</option>
             </select>
           </div>
 
@@ -101,7 +101,7 @@ const BookPickup = () => {
               name="address"
               value={formData.address}
               onChange={handleChange}
-              placeholder="Enter your pickup address"
+              placeholder="Please enter specific details about your address, flat/block number and any available landmarks in your area."
             />
           </div>
 
@@ -132,9 +132,9 @@ const BookPickup = () => {
                 value={formData.bagSize}
                 onChange={handleChange}
               >
-                <option>Big</option>
-                <option>Medium</option>
-                <option>Small</option>
+                <option value="large">Big</option>
+                <option value="medium">Medium</option>
+                <option value="small">Small</option>
               </select>
             </div>
 

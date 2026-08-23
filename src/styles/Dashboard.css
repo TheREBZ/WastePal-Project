@@ -859,6 +859,16 @@
   font-size: 11.5px;
 }
 
+.dash-status--completed {
+  background-color: var(--bg-mint);
+  color: var(--eco-green);
+}
+
+.dash-status--failed {
+  background-color: #fdecec;
+  color: #b42318;
+}
+
 /* Responsive */
 @media screen and (max-width: 1024px) {
   .dash-cards {

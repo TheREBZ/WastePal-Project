@@ -6,8 +6,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "../router/Router";
 import { getRegistrationData, saveRegistrationData } from "../services/registrationStorage";
-import { setAccountType } from "../services/authService";
-import { getAccessToken } from "../services/authStorage";
+import { setAccountType, refreshAccessToken, } from "../services/authService";
+import { getAccessToken, getRefreshToken, getCurrentUser, saveAuthSession } from "../services/authStorage";
 import { useState } from "react";
 import "../styles/Auth.css";
 
@@ -19,8 +19,9 @@ const RegisterAs = () => {
   const handleSelect = async (role) => {
     const registrationData = getRegistrationData();
     const accessToken = getAccessToken();
+    const refreshToken = getRefreshToken();
 
-    if (!registrationData || !accessToken) {
+    if (!registrationData || !accessToken || !refreshToken) {
       // No in-progress signup / no session — start over.
       navigate("/signup");
       return;
@@ -31,6 +32,27 @@ const RegisterAs = () => {
 
     try {
       await setAccountType(role, accessToken);
+      const response = await setAccountType(role, accessToken);
+
+      // Account type has changed in the database, but the existing
+      // access token still contains the old role.
+      // Refresh the tokens so the new JWT contains the selected role.
+      const refreshResponse = await refreshAccessToken(refreshToken);
+
+      const {
+        accessToken: newAccessToken,
+        refreshToken: newRefreshToken,
+        user: refreshedUser,
+      } = refreshResponse.data;
+
+      saveAuthSession({
+        accessToken: newAccessToken,
+        refreshToken: newRefreshToken,
+        user: {
+          ...getCurrentUser(),
+          ...refreshedUser,
+        },
+      });
 
       saveRegistrationData({
         ...registrationData,

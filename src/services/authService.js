@@ -1,5 +1,7 @@
 const API_URL = "https://renexa.onrender.com/api";
 
+export const getGoogleAuthUrl = () => `${API_URL}/auth/google`;
+
 const handleResponse = async (response) => {
   const data = await response.json();
 
@@ -77,6 +79,7 @@ export const verifyEmail = async (otp) => {
     }),
   });
 
+  
   return handleResponse(response);
 };
 
