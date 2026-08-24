@@ -27,6 +27,7 @@ import { getCurrentUser, getAccessToken, clearAuthSession } from "../services/au
 import { logoutUser } from "../services/authService";
 import DashboardSubscription from "../components/DashboardSubscription";
 import dashboardLogo from "../assets/Horizontal-Logo-5.png";
+import DashboardReports from "../components/DashboardReports";
 
 const NAV_ITEMS = [
   { key: "overview", label: "Overview", icon: faGaugeHigh },
@@ -64,35 +65,6 @@ const PLACEHOLDER_COPY = {
     desc: "Reach our team or browse helpful articles about your account and pickups.",
   },
 };
-const SAMPLE_REPORTS = [
-  {
-    id: "rpt-2026-08",
-    period: "August 2026",
-    generatedOn: "Aug 12, 2026",
-    wasteDiverted: "22 kg",
-    recyclingRate: "43%",
-    status: "Pending",
-    details: "From your 1 pickup this month. plastics made up the largest share. No contamination flags on your bins.",
-  },
-  {
-    id: "rpt-2026-07",
-    period: "July 2026",
-    generatedOn: "Aug 1, 2026",
-    wasteDiverted: "42 kg",
-    recyclingRate: "78%",
-    status: "Complete",
-    details: "From your 3 pickups this month. Paper and cardboard made up the largest share, followed by mixed plastics. No contamination flags on your bins.",
-  },
-  {
-    id: "rpt-2026-06",
-    period: "June 2026",
-    generatedOn: "Jul 1, 2026",
-    wasteDiverted: "37 kg",
-    recyclingRate: "74%",
-    status: "Complete",
-    details: "From your 3 pickups this month. Glass volume was up compared to May. One pickup was rescheduled due to a public holiday.",
-  },
-];
 
 const Dashboard = () => {
   const { navigate } = useRouter();
@@ -276,7 +248,7 @@ const Dashboard = () => {
     if (activeView === "book-pickup") return <BookPickup />;
     if (activeView === "subscription") {return <DashboardSubscription />;}
     if (activeView === "settings") return <DashboardSettings />;
-    if (activeView === "reports") return renderReports();
+    if (activeView === "reports") { return <DashboardReports />;}
     if (activeView === "support") return renderSupport();
 
     const copy = PLACEHOLDER_COPY[activeView];

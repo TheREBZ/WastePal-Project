@@ -20,96 +20,56 @@ const Footer = () => {
               src={renexaLogo}
               alt="ReNexa Logo"
               className="footer-logo-icon"
-              width={100}
-              height={60}
+              width={110}
+              height={66}
             />
           </Link>
 
-          <p>
+          <p className="footer-description">
             Smarter waste management for cleaner homes,
             businesses, and communities.
           </p>
 
           <div className="footer-socials">
-            <a
-              href="#"
-              aria-label="Facebook"
-            >
+            <a href="#" aria-label="Facebook">
               <FontAwesomeIcon icon={faFacebookF} />
             </a>
 
-            <a
-              href="#"
-              aria-label="Instagram"
-            >
+            <a href="#" aria-label="Instagram">
               <FontAwesomeIcon icon={faInstagram} />
             </a>
 
-            <a
-              href="#"
-              aria-label="X"
-            >
+            <a href="#" aria-label="X">
               <FontAwesomeIcon icon={faXTwitter} />
             </a>
 
-            <a
-              href="#"
-              aria-label="LinkedIn"
-            >
+            <a href="#" aria-label="LinkedIn">
               <FontAwesomeIcon icon={faLinkedinIn} />
             </a>
           </div>
         </div>
 
-        <div className="footer-links">
-          <div>
-            <h3>Product</h3>
-
-            <Link to="/features">
-              Features
-            </Link>
-
-            <Link to="/how-it-works">
-              How it Works
-            </Link>
-
-            <Link to="/pricing">
-              Pricing
-            </Link>
-          </div>
-
-          <div>
-            <h3>Company</h3>
-
-            <Link to="/about">
-              About Us
-            </Link>
-
-            <Link to="/contact">
-              Contact
-            </Link>
-          </div>
-
-          <div>
-            <h3>Account</h3>
-
-            <Link to="/signup">
-              Sign Up
-            </Link>
-
-            <Link to="/login">
-              Log In
-            </Link>
-          </div>
-        </div>
+        <nav className="footer-nav">
+          <Link to="/how-it-works">How it Works</Link>
+          <Link to="/features">Features</Link>
+          <Link to="/pricing">Pricing</Link>
+          <Link to="/about">About Us</Link>
+          <Link to="/contact">Contact</Link>
+        </nav>
 
       </div>
 
       <div className="footer-bottom">
-        <p>
-          © {new Date().getFullYear()} ReNexa.
-          All rights reserved.
-        </p>
+        <div className="footer-bottom-inner">
+          <p>
+            © {new Date().getFullYear()} ReNexa. All rights reserved.
+          </p>
+
+          <div className="footer-legal">
+            <Link to="/privacy">Privacy</Link>
+            <Link to="/terms">Terms</Link>
+          </div>
+        </div>
       </div>
     </footer>
   );

@@ -1,5 +1,10 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMobileScreenButton, faTruck, faMedal } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMobileScreenButton,
+  faTruck,
+  faClipboardCheck,
+  faRecycle,
+} from "@fortawesome/free-solid-svg-icons";
 import Layout from "../components/Layout";
 import "../styles/HowItWorks.css";
 
@@ -10,88 +15,153 @@ const HowItWorks = () => {
         <h1>
           Transforming Waste into <span>Impact.</span>
         </h1>
+
         <p>
-          Our seamless process takes the effort out of eco-friendly living. From your
-          doorstep to a sustainable future, here is how we make a difference together.
+          Our seamless process takes the effort out of responsible waste
+          management. From scheduling a pickup to collection and recovery,
+          ReNexa helps make waste disposal simpler and more reliable.
         </p>
       </section>
 
       <section className="how-steps section-inner">
+
+        {/* Step 1 */}
         <div className="how-card how-card--sm">
-          <span className="step-badge step-badge--1">1</span>
+          <span className="step-badge step-badge--1">
+            1
+          </span>
+
           <h3>Book Pickup</h3>
+
           <p>
-            Schedule a collection via our intuitive app in just a few taps. Choose a
-            time that fits your life.
+            Schedule a waste collection directly from your dashboard.
+            Choose your waste type, pickup address, date, time, and
+            quantity.
           </p>
+
           <div className="how-illustration how-illustration--phone">
-            <FontAwesomeIcon icon={faMobileScreenButton} />
+            <FontAwesomeIcon
+              icon={faMobileScreenButton}
+            />
           </div>
         </div>
 
+        {/* Step 2 */}
         <div className="how-card how-card--sm">
-          <span className="step-badge step-badge--2">2</span>
+          <span className="step-badge step-badge--2">
+            2
+          </span>
+
           <h3>Waste Collection</h3>
+
           <p>
-            Our pickers arrive exactly when scheduled, ensuring clean,
-            efficient pickups right from your door.
+            Your pickup request is received and prepared for collection
+            by one of our available waste pickers.
           </p>
+
           <div className="how-illustration how-illustration--truck">
             <FontAwesomeIcon icon={faTruck} />
           </div>
         </div>
 
+        {/* Step 3 */}
         <div className="how-card how-card--sm">
-          <span className="step-badge step-badge--3">3</span>
-          <h3>AI-Powered Sorting</h3>
+          <span className="step-badge step-badge--3">
+            3
+          </span>
+
+          <h3>Track Your Pickup</h3>
+
           <p>
-            Our smart sorting facilities use AI-powered scanners to maximize recovery
-            rates and minimize landfill waste.
+            Follow the progress of your request from your dashboard.
+            Your booking starts as pending and becomes confirmed once
+            a waste picker has been assigned.
           </p>
+
+          <div className="how-illustration how-illustration--phone">
+            <FontAwesomeIcon
+              icon={faClipboardCheck}
+            />
+          </div>
+
           <div className="how-tags">
-            <span className="how-tag">AI Powered</span>
-            <span className="how-tag">99% Accuracy</span>
+            <span className="how-tag">
+              Pending
+            </span>
+
+            <span className="how-tag">
+              Confirmed
+            </span>
           </div>
         </div>
 
+        {/* Step 4 */}
         <div className="how-card how-card--sm">
-          <span className="step-badge step-badge--4">4</span>
+          <span className="step-badge step-badge--4">
+            4
+          </span>
+
           <h3>Material Recovery</h3>
+
           <p>
-            Recovered materials are processed and prepared to be reintegrated into the
-            manufacturing cycle.
+            Collected recyclable materials can be separated and
+            prepared for recovery, helping reduce the amount of useful
+            material that ends up as general waste.
           </p>
-          <div className="how-weights">
-            <span>1728 kg</span>
-            <span className="how-weights-arrow">→</span>
-            <span className="how-weights-highlight">1117 kg</span>
+
+          <div className="how-illustration how-illustration--truck">
+            <FontAwesomeIcon icon={faRecycle} />
           </div>
-          <a className="how-link" href="#impact">
-            See our impact metrics →
+
+          <a
+            className="how-link"
+            href="#waste-fact"
+          >
+            Learn more about waste →
           </a>
         </div>
+
       </section>
 
-      <section className="how-rewards section-inner">
+      {/* Waste awareness section */}
+      <section
+        className="how-rewards section-inner"
+        id="waste-fact"
+      >
         <div className="how-rewards-card">
+
           <div className="how-rewards-copy">
-            <span className="step-badge step-badge--5">5</span>
-            <h3>Earn Rewards</h3>
+            <span className="step-badge step-badge--5">
+              ?
+            </span>
+
+            <h3>Did You Know?</h3>
+
             <p>
-              Your commitment to the planet pays off. Earn EcoPoints for every
-              successful pickup and redeem them for exclusive discounts with our
-              sustainable brand partners.
+              Lagos generates approximately 13,000 tonnes of waste
+              every day. As the city continues to grow, proper waste
+              collection, responsible disposal, and separating
+              recyclable materials can all play a part in keeping
+              communities cleaner.
             </p>
           </div>
+
           <div className="how-rewards-balance">
             <span className="how-rewards-icon">
-              <FontAwesomeIcon icon={faMedal} />
+              <FontAwesomeIcon icon={faRecycle} />
             </span>
+
             <div>
-              <p className="how-rewards-label">Current Balance</p>
-              <p className="how-rewards-value">2,450 pts</p>
+              <p className="how-rewards-label">
+                Lagos Daily Waste
+              </p>
+
+              <p className="how-rewards-value">
+                ~13,000 tonnes
+              </p>
             </div>
           </div>
+
         </div>
       </section>
     </Layout>
