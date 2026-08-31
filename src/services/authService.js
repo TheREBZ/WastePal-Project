@@ -1,15 +1,25 @@
-const API_URL = "https://renexa.onrender.com/api";
+const API_URL =
+  "https://renexa.onrender.com/api";
 
-export const getGoogleAuthUrl = () => `${API_URL}/auth/google`;
+export const getGoogleAuthUrl = () =>
+  `${API_URL}/auth/google`;
 
-const handleResponse = async (response) => {
-  const data = await response.json();
+const handleResponse = async (
+  response
+) => {
+  let data = null;
+
+  try {
+    data = await response.json();
+  } catch {
+    data = null;
+  }
 
   if (!response.ok) {
     throw new Error(
       data?.message ||
-      data?.error ||
-      "Something went wrong. Please try again."
+        data?.error ||
+        "Something went wrong. Please try again."
     );
   }
 

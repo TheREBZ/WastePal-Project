@@ -23,9 +23,6 @@ const Home = () => {
       <section className="hero">
         <div className="hero-inner">
           <div className="hero-copy">
-            <span className="hero-badge">
-              <FontAwesomeIcon icon={faLeaf} /> Eco-friendly Waste Solutions
-            </span>
             <h1>
               Smarter waste management for a <span>greener city.</span>
             </h1>

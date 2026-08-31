@@ -32,7 +32,6 @@ const RegisterAs = () => {
 
     try {
       await setAccountType(role, accessToken);
-      const response = await setAccountType(role, accessToken);
 
       // Account type has changed in the database, but the existing
       // access token still contains the old role.
